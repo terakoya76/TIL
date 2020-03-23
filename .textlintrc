@@ -1,0 +1,37 @@
+{
+  "rules": {
+    "preset-ja-spacing": true,
+    "preset-ja-technical-writing": {
+      "ja-no-mixed-period": false,
+      "max-kanji-continuous-len": false,
+      "sentence-length": {
+        "max": 200
+      }
+    },
+    "preset-jtf-style": true,
+    "prh": {
+      "rulePaths": ["./prh.yml"]
+    },
+    "no-start-duplicated-conjunction": {
+      "interval": 2
+    },
+    # global
+    # NOTE: textlint-rule-date-weekday-mismatchが使っているchrono-node@1.4.8が脆弱性
+    # "date-weekday-mismatch": true
+    "no-dead-link": true,
+    "no-surrogate-pair": true,
+    "write-good": true,
+
+    # for japanese
+    "ja-hiragana-keishikimeishi": true,
+    "ja-hiragana-fukushi": true,
+    "ja-hiragana-hojodoushi": true,
+    "ja-no-orthographic-variants": true,
+    "no-mixed-zenkaku-and-hankaku-alphabet": true,
+    "prefer-tari-tari": true,
+    "use-si-units": true,
+    "@textlint-ja/textlint-rule-no-insert-dropping-sa": true,
+    "@textlint-ja/textlint-rule-no-synonyms": true
+  },
+  "plugins": []
+}

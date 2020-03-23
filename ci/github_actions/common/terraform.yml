@@ -1,0 +1,114 @@
+name: terraform
+
+on:
+  pull_request:
+
+env:
+  AWS_DEFAULT_REGION: ap-northeast-1
+
+jobs:
+  terraform-fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+
+      - id: fmt
+        run: terraform fmt -check -recursive -diff -no-color
+        continue-on-error: true
+
+      - uses: actions/github-script@v2
+        if: steps.fmt.outputs.exitcode != 0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = function(){/*
+            #### Terraform Format and Style `${{ steps.fmt.outcome }}`
+            ```diff\n${{ steps.fmt.outputs.stdout }}```
+            *Pusher: @${{ github.actor }}, Action: `${{ github.event_name }}`, Workflow: `${{ github.workflow }}`*
+            */}.toString().split("\n").slice(1,-1).join("\n")
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+            throw "failed to run `terraform fmt -check -recursive -diff`"
+
+  terraform-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: reviewdog/action-tflint@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          flags: "--module"
+
+  terraform-init-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+
+      - id: init
+        run: terraform init -no-color
+        continue-on-error: true
+
+      - uses: actions/github-script@v2
+        if: steps.init.outputs.exitcode != 0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Init \`${{ steps.init.outcome }}\`
+            \`\`\`${{ steps.init.outputs.stderr }}\`\`\`
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+            throw "failed to run `terraform init`"
+
+      - id: validate
+        run: terraform validate -no-color
+        continue-on-error: true
+
+      - uses: actions/github-script@v2
+        if: steps.validate.outputs.exitcode != 0
+        env:
+          STDOUT: "terraform\n${{ steps.validate.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Init \`${{ steps.init.outcome }}\`
+            #### Terraform Validate \`${{ steps.validate.outcome }}\`
+            \`\`\`${{ steps.validate.outputs.stderr }}\`\`\`
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+            throw "failed to run `terraform validate`"
+
+  terraform-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
+        uses: Dirrk/terraform-docs@v1.0.8
+        with:
+          tf_docs_working_dir: .
+          tf_docs_output_file: README.md
+          tf_docs_output_method: inject
+          tf_docs_git_push: true
+          tf_docs_git_commit_message: 'terraform-docs: automated action'

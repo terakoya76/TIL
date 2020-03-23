@@ -1,0 +1,26 @@
+name: test
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-ruby@v1
+
+      - name: download dependencies
+        run: bundle install
+        env:
+          # use access token for GitHub https aceess
+          # https://bundler.io/v2.2/bundle_config.html
+          BUNDLE_GITHUB__COM: x-access-token:${{ secrets.REPO_SCOPED_TOKEN }}
+
+      - name: lint
+        run: bundle ex rubocop -a
+
+      - name: Test with RSpec
+        run: bundle exec rspec

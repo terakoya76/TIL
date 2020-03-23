@@ -1,0 +1,48 @@
+name: test
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        go: [1.12, 1.13, 1.14]
+        os: [ubuntu-18.04, ubuntu-16.04]
+        mysql: ["mysql:5.7", "mysql:8.0"]
+
+    name: all
+    runs-on: ${{ matrix.os }}
+    services:
+      mysql:
+        image: ${{ matrix.mysql }}
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        ports:
+          - 13306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - uses: actions/cache@v2
+        id: cache-go-sum
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      - name: download dependencies
+        if: steps.cache-go-sum.outputs.cache-hit != 'true'
+        run: go mod download
+      - name: lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v1.32.2
+          gofmt -s -w .
+          golangci-lint run --timeout 3m
+      - name: test
+        run: go test -race -v ./...

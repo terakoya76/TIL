@@ -1,0 +1,16 @@
+name: Close stale PR
+on:
+  schedule:
+  - cron: "0 0 * * *" # 09:00 JST
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/stale@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-pr-message: "This PR has no-updates for 30 days. Will close in 3 days"
+        days-before-stale: 30
+        days-before-close: 3
+        operations-per-run: 60
