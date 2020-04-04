@@ -1,4 +1,5 @@
-## Collect from Docker socket
+## fluend conf example
+### Collect from Docker socket
 ```
 @include "#{ENV['FLUENTD_SYSTEMD_CONF'] || 'systemd'}.conf"
 @include "#{ENV['FLUENTD_PROMETHEUS_CONF'] || 'prometheus'}.conf"
@@ -17,8 +18,9 @@
 </source>
 ```
 
-## Concat
-- https://github.com/fluent-plugins-nursery/fluent-plugin-concat
+### Concat
+Ref: https://github.com/fluent-plugins-nursery/fluent-plugin-concat
+
 ```
 # concat log split by docker log driver (ref. https://bugzilla.redhat.com/show_bug.cgi?id=1573680
 <filter kubernetes.**>
@@ -28,8 +30,9 @@
 </filter>
 ```
 
-## Parser
-- https://docs.fluentd.org/parser
+### Parser
+Ref: https://docs.fluentd.org/parser
+
 ```
 <filter kubernetes.**>
   @type parser
@@ -43,8 +46,9 @@
 </filter>
 ```
 
-## Record Transformer
-- https://docs.fluentd.org/filter/record_transformer
+### Record Transformer
+Ref: https://docs.fluentd.org/filter/record_transformer
+
 ```
 <filter kubernetes.**>
   @type record_transformer
@@ -55,8 +59,9 @@
 </filter>
 ```
 
-## Rewrite Tag
-- https://github.com/fluent/fluent-plugin-rewrite-tag-filter
+### Rewrite Tag
+Ref: https://github.com/fluent/fluent-plugin-rewrite-tag-filter
+
 ```
 # original_tag: kubernetes.var.log.containers.<pod_name>_<namespace>_<filename>.log
 # after_tag:    s3_root_attached.<s3_root>.kubernetes.var.log.containers.<pod_name>_<namespace>_<filename>.log
@@ -70,9 +75,11 @@
 </match>
 ```
 
-## Copy and Relabel
-- https://docs.fluentd.org/output/copy
-- https://docs.fluentd.org/output/relabel
+### Copy and Relabel
+Ref:
+* https://docs.fluentd.org/output/copy
+* https://docs.fluentd.org/output/relabel
+
 ```
 <match s3_root_attached.**>
   @type copy
@@ -87,8 +94,9 @@
 </match>
 ```
 
-## S3 Out
-- https://docs.fluentd.org/output/s3
+### S3 Out
+Ref: https://docs.fluentd.org/output/s3
+
 ```
 <label @application_logs>
   # create temporary metadata for tag

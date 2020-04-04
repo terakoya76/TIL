@@ -1,7 +1,7 @@
 ## arproxy により SQL に context を埋め込む
-- https://github.com/cookpad/arproxy
+* https://github.com/cookpad/arproxy
 
-How to embed
+### How to embed
 ```ruby
 class ContextAttacher < Arproxy::Base
   def execute(sql, name = nil)
@@ -12,7 +12,7 @@ class ContextAttacher < Arproxy::Base
 end
 ```
 
-How to extract
+### How to extract
 ```ruby
 ctx_re = %r{/\* ctx=(.*) \*/\z}
 matched = sql.match(ctx_re)
