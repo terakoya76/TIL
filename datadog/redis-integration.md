@@ -29,3 +29,26 @@ datadog:
             tags:
               - instance:test-redis
 ```
+
+## Monitor Setting
+### datadog terraform provider
+```hcl
+resource "datadog_monitor" "redis_net_rejected" {
+  name  = "redis_net_rejected"
+  type  = "metric alert"
+  query = "avg(last_1m):avg:redis.net.rejected{*} by {instance} > 0.1"
+  thresholds = {
+    "critical" = "0.1"
+  }
+
+  message = <<EOF
+maxclients 制限のために redis への接続が拒否されました
+EOF
+}
+```
+
+### Post custom metrics for testing
+```bash
+$ pip3 install datadog
+$ dog metric post --tags instance:test-redis redis.net.rejected 10
+```
