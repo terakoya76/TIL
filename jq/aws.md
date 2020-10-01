@@ -10,6 +10,14 @@ $ aws autoscaling describe-auto-scaling-groups | jq '
 '
 ```
 
+### EKS
+#### List Cluster w/ given version
+```bash
+$ aws eks list-clusters | jq -r ".clusters[]" | xargs -I{} aws eks describe-cluster --name {} | jq -rc 'select(.cluster.version == "<version>") | [.cluster.
+name, .cluster.version]'
+```
+
+
 ### RDS
 #### List RDS w/ given identifier
 ```bash
@@ -21,6 +29,7 @@ $ aws rds describe-db-instances  | jq '.DBInstances[].DBInstanceIdentifier' | gr
 ```
 
 #### Filter RDS Instance by Specific ParameterGroup
+instance
 ```bash
 $ aws rds describe-db-instances | jq '.DBInstances[] | select(.DBParameterGroups[].DBParameterGroupName == "<PG>") | .DBInstanceIdentifier'
 
@@ -35,10 +44,31 @@ $ aws rds reboot-db-instance --db-instance-identifier $DB
 $ aws rds describe-db-instances --db-instance-identifier $DB | jq .DBInstances[].DBParameterGroups[]
 ```
 
+cluster
+```bash
+$ aws rds describe-db-clusters | jq '.DBClusters[] | select(.DBClusterParameterGroup == "<CPG>") | .DBClusterIdentifier'
+
+```
+
+
 #### Compare ParameterGroup
 ```bash
 $ PG1=<parameter-group1 name>
 $ PG2=<parameter-group2 name>
 $ QUERY="Parameters[?ParameterValue!='null'].{ParameterName:ParameterName,ParameterValue:ParameterValue}"
 $ diff -u <(aws rds describe-db-parameters --db-parameter-group-name $PG1 --query $QUERY | jq -r 'sort_by(.ParameterName)') <(aws rds describe-db-parameters --db-parameter-group-name $PG2 --query $QUERY | jq -r 'sort_by(.ParameterName)')
+
+$ CPG1=<cluster-parameter-group1 name>
+$ CPG2=<cluster-parameter-group2 name>
+$ QUERY="Parameters[?ParameterValue!='null'].{ParameterName:ParameterName,ParameterValue:ParameterValue}"
+$ diff -u <(aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name $CPG1 --query $QUERY | jq -r 'sort_by(.ParameterName)') <(aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name $CPG2 --query $QUERY | jq -r 'sort_by(.ParameterName)')
 ```
+
+### Route53
+
+#### List Target Endpoints backed by Name
+```bash
+$ ZID=<hosted_zone_id>
+$ aws route53 list-resource-record-sets --hosted-zone-id $ZID | jq '.ResourceRecordSets[] | select(.Name == "<name>") | .ResourceRecords[]'
+```
+

@@ -398,7 +398,7 @@ udp        0      0 127.0.0.53:53           0.0.0.0:*                           
 ```
 
 `systemd-resolved` が問い合わせを行うのは `172.30.0.2:53`
-今回使っている VPC のネットワークレンジが `172.30.0.0/16` なので、+2 した Route53 Custom DNS Server に投げていることがわかる。
+今回使っている VPC のネットワークレンジが `172.30.0.0/16` なので、Route53 Custom DNS Server `172.30.0.2` に投げていることがわかる。
 * https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html
 
 ```bash
@@ -472,7 +472,7 @@ trsion 2.1 of the License, or
 #DNSStubListener=yes
 ```
 
-### 直接 Custom DNS Server に問い合わせるようにしてみる
+### 直接 Name Server に問い合わせるようにしてみる
 結果、遅延するときは遅延したので stub resolver cache の問題ではなさそう
 
 ```bash
