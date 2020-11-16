@@ -42,3 +42,8 @@
 - name: bump:patch
   description: bump patch version
   color: 4eaad8
+
+# https://github.com/pascalgn/automerge-action
+- name: automerge
+  description: automerge mark
+  color: 0052cc
