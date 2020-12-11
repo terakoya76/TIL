@@ -8,7 +8,6 @@ $ docker-compose pull
 Pulling db              ... done
 Pulling redis           ... done
 Pulling auth            ... error
-Pulling accounts        ... error
 
 ERROR: for auth Get https://xxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/v2/auth/manifests/latest: no basic auth credentials
 ```
