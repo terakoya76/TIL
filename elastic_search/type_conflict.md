@@ -6,7 +6,7 @@ ENDPOINT="elastic/search/endpoint"
 
 for idx in `cat conflict-index-list.txt | grep <index-name-prefix>`
 do
-    curl -XPUT -H "Content-Type: application/json" "$ENDPOINT/tmp-$idx" -d "{\"mappings\":{\"cebu\":{\"properties\":{\"company_id\":{\"type\": \"long\"}}}}}"
+    curl -XPUT -H "Content-Type: application/json" "$ENDPOINT/tmp-$idx" -d "{\"mappings\":{\"my_index\":{\"properties\":{\"company_id\":{\"type\": \"long\"}}}}}"
     echo 'add tmp index'
     sleep 3
 
@@ -22,7 +22,7 @@ do
     echo 'delete old'
     sleep 3
 
-    curl -XPUT -H "Content-Type: application/json" "$ENDPOINT/$idx" -d "{\"mappings\":{\"cebu\":{\"properties\":{\"company_id\":{\"type\": \"long\"}}}}}"
+    curl -XPUT -H "Content-Type: application/json" "$ENDPOINT/$idx" -d "{\"mappings\":{\"my_index\":{\"properties\":{\"company_id\":{\"type\": \"long\"}}}}}"
     echo 'add new index'
     sleep 3
 

@@ -9,7 +9,7 @@ before:
 
 builds:
   - main: .
-    binary: git-bump
+    binary: hoge
     ldflags:
       - -s -w
       - -X main.Version={{.Version}}
