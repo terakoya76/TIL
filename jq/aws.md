@@ -28,6 +28,15 @@ $ aws autoscaling describe-auto-scaling-groups | jq --arg KEY ${KEY} --arg VALUE
 '
 ```
 
+#### Pickup named ASG
+```bash
+$ NAME=<name>
+$ aws autoscaling describe-auto-scaling-groups | jq --arg NAME ${NAME} '
+.AutoScalingGroups[]
+  | select(.AutoScalingGroupName == $NAME)
+'
+```
+
 #### Pick up tagged Instances
 ```bash
 $ KEY=<key-name>

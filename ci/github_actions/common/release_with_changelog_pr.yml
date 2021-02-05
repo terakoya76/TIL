@@ -1,4 +1,4 @@
-name: release
+name: release_with_changelog_pr
 on:
   push:
     branches:
@@ -44,6 +44,22 @@ jobs:
           changelog="${changelog//$'\r'/'%0D'}"
           echo "::set-output name=changelog::$changelog"
 
+      - name: update CHANGELOG.md
+        if: "steps.tag.outputs.value != ''"
+        run: git-chglog -o CHANGELOG.md
+
+      - uses: peter-evans/create-pull-request@v3
+        if: "steps.tag.outputs.value != ''"
+        with:
+          title: "update CHANGELOG.md"
+          body: ${{ steps.changelog.outputs.changelog }}
+          branch: update-changelog
+          author: "GitHub Action <action@github.com>"
+          committer: "GitHub Action <action@github.com>"
+          commit-message: "docs: update CHANGELOG.md"
+          labels: "automerge"
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+
       # Create release.
       - uses: actions/create-release@v1
         if: "steps.tag.outputs.value != ''"
@@ -55,3 +71,4 @@ jobs:
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
+

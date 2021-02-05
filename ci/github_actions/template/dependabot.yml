@@ -1,0 +1,50 @@
+# https://docs.github.com/ja/github/administering-a-repository/configuration-options-for-dependency-updates#
+version: 2
+updates:
+- package-ecosystem: gomod
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+    - "hoge"
+
+- package-ecosystem: "npm"
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+    - "hoge"
+
+- package-ecosystem: "bundler"
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+    - "hoge"
+
+- package-ecosystem: "cargo"
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+    - "hoge"
+
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+    - "hoge"
+
+- package-ecosystem: "docker"
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  reviewers:
+    - "hoge"
