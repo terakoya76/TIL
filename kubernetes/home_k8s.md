@@ -185,7 +185,7 @@ use aarch64 adapted images instead of non-dev amd64 images
 * https://hub.docker.com/r/cilium/cilium-dev
 * https://hub.docker.com/r/cilium/operator-dev
 
-v1.9.1 image seems to be broken for aarch64
+v1.9.x image require to be provided `--disable-envoy-version-check` for aarch64
 * https://github.com/cilium/cilium/issues/14117#issuecomment-739104709
 
 ### 論理削除

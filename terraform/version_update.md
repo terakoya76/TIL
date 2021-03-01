@@ -2,16 +2,14 @@
 
 ### show proj and its terraform version
 ```bash
-$ find . -type f \
-| grep .terraform-version \
+$ find . -type f -name .terraform-version \
 | xargs  -I{}  bash -c 'echo -n "{} - "; cat {}' \
 | sort
 ```
 
 find proj which uses version `0.12.x`
 ```bash
-$ find . -type f \
-| grep .terraform-version \
+$ find . -type f -name .terraform-version \
 | xargs  -I{}  bash -c 'echo -n "{} - "; cat {}' \
 | grep "0.12" \
 | sort
@@ -23,8 +21,7 @@ $ find . -type f \
 * https://github.com/terraform-linters/tflint/blob/master/docs/rules/terraform_unused_required_providers.md
 
 ```bash
-$ find . -type f \
-| grep provider.tf \
+$ find . -type f -name provider.tf \
 | xargs  -I{}  bash -c 'echo -n "{} "; grep required_providers {} | xargs echo -n; echo ""' \
 | grep -v required_providers \
 | sort
@@ -32,18 +29,17 @@ $ find . -type f \
 
 ### show proj and its aws-provider version
 ```bash
-$ find . -type f \
-| grep provider.tf \
+$ find . -type f -name provider.tf \
 | xargs  -I{}  bash -c 'echo -n "{} "; grep -E "\s+version" {} | xargs echo -n; echo ""' \
 | sort
 ```
 
 show proj which uses aws-provider version `2.x.x`
 ```bash
-$ find . -type f \
-| grep provider.tf \
+$ find . -type f -name provider.tf \
 | xargs  -I{}  bash -c 'echo -n "{} "; grep -E "\s+version" {} | xargs echo -n; echo ""' \
-| grep -E "\s+2" \
+| grep "~> 2" \
+| grep -v .terraform \
 | sort
 ```
 
@@ -52,8 +48,7 @@ $ find . -type f \
 
 ```bash
 # create 0.14.x proj list to be ignored
-$ find . -type f \
-| grep .terraform-version \
+$ find . -type f -name .terraform-version \
 | xargs  -I{}  bash -c 'echo -n "{} - "; cat {}' \
 | grep "0.14" \
 | sort \
@@ -77,10 +72,11 @@ $ for proj in `cat updated.txt`; do pushd ${proj}; rm -rf .terraform; terraform 
 ```bash
 $ result_path=~/lint.txt
 $ root=$(pwd)
-$ for i in $(find . -type f | grep provider.tf | sort)
+$ for i in $(find . -type f -name provider.tf | sort)
 do
   dir=${i%/*}
   pushd ${dir} >> ${result_path}
+  rm -rf .terraform
   tflint --config="${root}/.tflint.hcl" >> ${result_path}
   popd
 done
@@ -90,7 +86,7 @@ done
 * https://github.com/keilerkonzept/terraform-module-versions
 ```bash
 $ result_path=~/updates.txt
-$ for i in $(find . -type f | grep provider.tf | sort)
+$ for i in $(find . -type f -name provider.tf | sort)
 do
   dir=${i%/*}
   echo ${dir} >> ${result_path}
