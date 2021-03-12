@@ -1,14 +1,37 @@
-## ruby ffi
-Ref: http://kazegusuri.hateblo.jp/entry/2014/03/02/192729
-
-### ffi
+## ffi
 Ref: https://github.com/ffi/ffi
+
+### Types
+Ref: https://github.com/ffi/ffi/wiki/Types
+
+### String and Memory Allocation
+ruby の string pointer を C 側で mutate する場合、C 側の処理が完了するまで ruby string は生存するようにケアする必要あり
+cf. https://github.com/ffi/ffi/wiki/Core-Concepts#memory-management
+
+string を返り値にしたい場合、workaround が必要
+```ruby
+module AugeasLib
+  extend FFI::Library
+  ffi_lib "libaugeas.so"
+  attach_function :aug_get, [:pointer, :string, :pointer], :int
+end
+
+def get(path)
+  ptr = FFI::MemoryPointer.new(:pointer, 1)
+  AugeasLib.aug_get(@aug, path, ptr)
+  strPtr = ptr.read_pointer()
+  return strPtr.null? ? nil : strPtr.read_string().force_encoding('UTF-8') # returns UTF-8 encoded string
+end
+```
+cf. https://github.com/ffi/ffi/wiki/Examples#single-string
+
+### ffi で bridge 実装
+Ref: http://kazegusuri.hateblo.jp/entry/2014/03/02/192729
 
 requirements
 * The libffi library and development headers - this is commonly in the libffi-dev or libffi-devel packages
 
-
-### Simple な実装
+#### Simple な実装
 memory 管理を ruby から C の FFI を叩くことで client 側から行う
 ```ruby
 module FooLib
@@ -29,7 +52,7 @@ module FooLib
 end
 ```
 
-### Memory 管理 free な実装
+#### Memory 管理 free な実装
 
 ManagedStruct
 * Struct に hook を掛けられる
@@ -46,7 +69,6 @@ class ManagedFoo < FFI::ManagedStruct
    end
  end
 ```
-
 
 AutoPointer
 * Pointer に hook を掛けられる

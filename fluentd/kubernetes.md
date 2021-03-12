@@ -135,7 +135,7 @@ Ref: https://docs.fluentd.org/output/s3
     path ${tag[1]}/application_logs/${tag[2]}/${tag[5]}/
     time_slice_format     %Y/%m/%d/%H
 
-    flush_interval        1m
+    flush_interval        30s
     slow_flush_log_threshold 25s
 
     <inject>
@@ -149,6 +149,7 @@ Ref: https://docs.fluentd.org/output/s3
       timekey 3600
       timekey_use_utc true
       chunk_limit_size 100m
+      flush_at_shutdown true
     </buffer>
     <format>
       @type json
@@ -168,7 +169,7 @@ Ref: https://docs.fluentd.org/output/s3
     path ${tag[1]}/container_logs/${tag[2]}/${tag[4]}/
     time_slice_format     %Y/%m/%d/%H
 
-    flush_interval        1m
+    flush_interval        30s
     slow_flush_log_threshold 25s
 
     <inject>
@@ -182,6 +183,7 @@ Ref: https://docs.fluentd.org/output/s3
       timekey 3600
       timekey_use_utc true
       chunk_limit_size 100m
+      flush_at_shutdown true
     </buffer>
     <format>
       @type json
@@ -189,4 +191,28 @@ Ref: https://docs.fluentd.org/output/s3
   </match>
 </label>
 ```
+
+### fluentd-kubernetes-daemonset
+Ref: https://github.com/fluent/fluentd-kubernetes-daemonset
+
+tail source
+* path は wildcard
+* pos_file 固定
+```xml
+<source>
+  @type tail
+  @id in_tail_container_logs
+  path /var/log/containers/*.log
+  pos_file /var/log/fluentd-containers.log.pos
+  tag "#{ENV['FLUENT_CONTAINER_TAIL_TAG'] || 'kubernetes.*'}"
+  exclude_path "#{ENV['FLUENT_CONTAINER_TAIL_EXCLUDE_PATH'] || use_default}"
+  read_from_head true
+  @include tail_container_parse.conf
+</source>
+```
+
+path
+* `/var/lib/docker/container` に docker が log を吐く。
+* kubelet は `/var/lib/docker/container` から `/var/log/containers` 下へ symlink を貼る
+* fluentd が wildcard path ですべての docker log を監視対象に入れられる
 
