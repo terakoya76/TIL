@@ -1,0 +1,14 @@
+name: Delete merged branch
+
+on:
+  schedule:
+    - cron: "0 18 * * *" # 3:00 JST
+
+jobs:
+  delete-merged-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete merged branch
+        uses: SvanBoxel/delete-merged-branch@v1.4.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
