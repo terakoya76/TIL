@@ -92,6 +92,7 @@ $ aws rds describe-db-instances  | jq '.DBInstances[].DBInstanceIdentifier' | gr
 instance
 ```bash
 $ aws rds describe-db-instances | jq --arg PG ${PG} '.DBInstances[] | select(.DBParameterGroups[].DBParameterGroupName == $PG) | .DBInstanceIdentifier'
+$ aws rds describe-db-clusters | jq --arg PG ${PG} '.DBClusters[] | select(.DBClusterParameterGroup == $PG) | .DBClusterIdentifier'
 
 # change parameter group
 $ PG=<parameter-group>
