@@ -59,6 +59,9 @@ $ aws rds describe-db-instances |  jq -c '.DBInstances[] | select(.DBInstanceCla
 
 # Instance Class + Stage ごとに一覧
 $ aws rds describe-db-instances | jq -c '.DBInstances[] | select(.DBInstanceClass == "db.t2.small") | select(.TagList[] | .Key == "Stage" and .Value == "production") | [.DBInstanceIdentifier, .DBInstanceClass, .MultiAZ]'
+
+# Instance without the specific tag
+$ aws rds describe-db-instances | jq -c '.DBInstances[] | select(.TagList | any(.Key == "Project") | not) | [.DBInstanceIdentifier, .DBInstanceClass, .MultiAZ]'
 ```
 
 ### Change Instance Class

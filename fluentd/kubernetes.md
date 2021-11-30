@@ -26,8 +26,19 @@ Ref: https://github.com/fluent-plugins-nursery/fluent-plugin-concat
 <filter kubernetes.**>
   @type concat
   key log
+  separator ""
   multiline_end_regexp /\n$/
+  timeout_label @TIMEOUT
 </filter>
+
+# Timeout/Default ともに送りたい output match
+<label @TIMEOUT>
+  <match **>
+    @type kinesis_firehose
+    delivery_stream_name kinesis-data-stream
+    region ap-northeast-1
+  </match>
+</label>
 ```
 
 ### Parser
