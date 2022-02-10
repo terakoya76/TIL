@@ -1,4 +1,4 @@
-## Useful stats table provided by MySQL
+# Useful stats table provided by MySQL
 
 for analyze workload
 * mysql.slow_log

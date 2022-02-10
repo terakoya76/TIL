@@ -1,10 +1,10 @@
-## ffi
+# ffi
 Ref: https://github.com/ffi/ffi
 
-### Types
+## Types
 Ref: https://github.com/ffi/ffi/wiki/Types
 
-### String and Memory Allocation
+## String and Memory Allocation
 ruby の string pointer を C 側で mutate する場合、C 側の処理が完了するまで ruby string は生存するようにケアする必要あり
 Ref: https://github.com/ffi/ffi/wiki/Core-Concepts#memory-management
 
@@ -25,7 +25,7 @@ end
 ```
 cf. https://github.com/ffi/ffi/wiki/Examples#single-string
 
-### ffi で bridge 実装
+## ffi で bridge 実装
 Ref: http://kazegusuri.hateblo.jp/entry/2014/03/02/192729
 
 requirements

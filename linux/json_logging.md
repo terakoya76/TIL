@@ -1,4 +1,4 @@
-## json logging
+# json logging
 ```bash
 function logging() {
     local msg=$1

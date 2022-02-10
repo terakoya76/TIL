@@ -1,4 +1,4 @@
-## Add Metadata to JSON
+# Add Metadata to JSON
 ```bash
 attach_metadata() {
     cat - \

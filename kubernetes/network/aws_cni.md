@@ -1,6 +1,6 @@
-## How aws-cni works
+# How aws-cni works
 
-### kube-system
+## kube-system
 ```bash
 $ k -n kube-system get po -A -o wide
 aws-node-2xkdp                                               1/1     Running            0          17h     10.1.12.251   ip-10-1-12-251.ap-northeast-1.compute.internal   <none>           <none>
@@ -11,7 +11,7 @@ coredns-6c6685d675-v8jrg                                     1/1     Running    
 $ k -n kube-system exec -it aws-node-2xkdp -- /bin/sh
 ```
 
-### iptables
+## iptables
 ```bash
 $ iptables -L -nv
 Chain INPUT (policy ACCEPT 10 packets, 635 bytes)
@@ -66,7 +66,7 @@ iptables -L [-t filter]
 iptables -L -t nat
 iptables -L -t mangle
 
-### ip rule
+## ip rule
 ```bash
 $ ip rule
 0:	from all lookup local
@@ -81,12 +81,12 @@ $ ip rule del from all to 10.1.12.216 lookup main
 $ ip rule add from all to 10.1.12.216 lookup main
 ```
 
-### ip route
+## ip route
 ```bash
 $ ip route show table main
 ```
 
-### ipamd log
+## ipamd log
 ```bash
 $ cat /host/var/log/aws-routed-eni/ipamd.log.2020-04-03-06 | grep 10.1.9.105
 ```

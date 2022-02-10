@@ -1,4 +1,4 @@
-## Multi Thread Slave
+# Multi Thread Slave
 
 Ref:
 * https://www.slideshare.net/takanorisejima/mysql57-ga-multithreaded-slave
@@ -28,15 +28,16 @@ relay_log_info_repository = TABLE
 relay_log_recovery = ON
 relay_log_purge = ON
 ```
-### binlog_group_commit_sync_delay
+
+## binlog_group_commit_sync_delay
 * binlog 同期する前に待つ時間(ms)
 * wait を増やせばその分多くの entry を group commit に含められる
 * response time は悪化するが throughput は上がる
 
-### binlog_group_commit_sync_no_delay_count
+## binlog_group_commit_sync_no_delay_count
 * 1 commit に含められる max trx 数
 
-### LOGICAL_CLOCK
+## LOGICAL_CLOCK
 Ref:
 * https://dev.mysql.com/worklog/task/?id=6314
 * https://en.wikipedia.org/wiki/Lamport_timestamp
@@ -61,14 +62,14 @@ binlog に gtid_event の一部として logical timestamp を書き込んでお
 参考
 * https://github.com/mysql/mysql-server/blob/mysql-5.7.12/sql/binlog.cc#L1391
 
-### MTS and Consistency
+## MTS and Consistency
 MTS and SBR or Non-Deterministic Query はアカン
 * INSERT ... SELECT など、MTS だと slave ごとに結果が変わってしまう
 
 MTS and Read-Uncommiteed もアカン
 * MTS で保証可能なのは binlog からの commit order なので
 
-### MTS and GTID
+## MTS and GTID
 Ref: https://dev.mysql.com/doc/refman/5.7/en/replication-features-transaction-inconsistencies.html
 
 GTID は有効にしないとアカン

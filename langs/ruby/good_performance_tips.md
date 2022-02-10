@@ -1,4 +1,4 @@
-## Good Performance Rails Code
+# Good Performance Rails Code
 Ref: https://shopify.engineering/write-fast-code-ruby-rails
 
 ActiveRecord

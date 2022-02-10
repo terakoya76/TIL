@@ -1,6 +1,6 @@
-## lxcfs
+# lxcfs
 
-### Summary
+## Summary
 Ref: https://github.com/lxc/lxcfs
 
 LXCFS is a small FUSE filesystem written with the intention of making Linux containers feel more like a virtual machine.
@@ -25,7 +25,7 @@ procfs の提供
   * この機能により，コンテナ内でもホスト上と同じようにコマンドを実行して，コンテナ内のリソース状態をチェックできます。
 
 
-### LXCFS to provide container resource visibility on kubernetes
+## LXCFS to provide container resource visibility on kubernetes
 Ref: https://www.alibabacloud.com/blog/kubernetes-demystified-using-lxcfs-to-improve-container-resource-visibility_594109
 
 install and deploy LXCFS on all cluster nodes
@@ -100,6 +100,6 @@ Mem:        262144       2744     259400          0          0        312
 Swap:            0          0          0
 ```
 
-### Usecase
+## Usecase
 Debug another pod on kubernetes
 * https://github.com/aylei/kubectl-debug/pull/83

@@ -1,5 +1,6 @@
-## Bash Array
+# Bash Array
 
+## Basic
 ```bash
 $ arr1=(a b c)
 
@@ -18,7 +19,7 @@ b
 c
 ```
 
-bind from string
+## bind from string
 ```bash
 $ arr2=$(ls)
 $ for i in $(seq 0 6); do echo ${arr2[$i]}; done

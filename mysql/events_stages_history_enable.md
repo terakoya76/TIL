@@ -1,7 +1,7 @@
-## Enable EventsStagesHistory
+# Enable EventsStagesHistory
 Ref: https://dev.mysql.com/doc/refman/5.7/en/performance-schema-stage-tables.html
 
-### Initial State
+## Initial State
 ```sql
 mysql> SELECT * FROM performance_schema.setup_consumers WHERE NAME LIKE 'events_stages%';
 +----------------------------+---------+
@@ -182,7 +182,7 @@ Query OK, 119 rows affected (0.00 sec)
 Rows matched: 120  Changed: 119  Warnings: 0
 ```
 
-### Disable EventsStagesHistory
+## Disable EventsStagesHistory
 ```sql
 mysql> UPDATE performance_schema.setup_consumers SET ENABLED = 'NO' WHERE NAME LIKE 'events_stages_current';
 

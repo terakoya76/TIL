@@ -1,10 +1,10 @@
-## iptables memo
+# iptables memo
 Ref:
 - https://oxynotes.com/?p=6361
 - http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-ja-4/s1-iptables-options.html
 - http://www.asahi-net.or.jp/~aa4t-nngk/ipttut/output/ipttut_all.html
 
-### Chain Type
+## Chain Type
 | Chain Type        | Description                                                                                |
 |-------------|--------------------------------------------------------------------------------------------|
 | INPUT       | 入力（受信）に対するチェイン                                                               |
@@ -21,7 +21,7 @@ Ref:
 | mangleテーブル | POSTROUTING, PREROUTING, INPUT, OUTPUT, FORWARD | TOS（Type Of Service）フィールド等の値を書き換えます。TOSはパケット処理の優先度付けを行い、通信品質を制御する際に利用されます。また特定の通信マークを置き換える事もできます。                                                |
 | Rawテーブル    | PREROUTING、OUTPUT                              | mangleテーブルのように特定のパケットにマークを付けることですが、Rawテーブルでは追跡を除外するようマークを付けます。つまり、特定の通信をファイアウォールで処理せずに他の機材へ通したりといった経路制御する場合に利用します。 |
 
-### Command
+## Command
 command
 | Command              | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
@@ -47,7 +47,7 @@ parameter
 | -j (--jump)          | ターゲット（ACCEPT、DROP、REJECT）を指定                                                            |
 | -m（--match）        | 使用したい比較オプションモジュールを指定する                                                        |
 
-### User Defined Chain
+## User Defined Chain
 ```bash
 # 新規 Chain の追加
 $ iptables -N dropchain
@@ -57,7 +57,7 @@ $ iptables -A dropchain -j DROP
 $ iptables -A INPUT --dport 80 -j dropchain
 ```
 
-### Matching Module
+## Matching Module
 | Module    | Description                                                                                                                   |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------|
 | addrtype  | パケットのアドレスタイプに基づいたマッチを行うモジュール                                                                      |

@@ -1,5 +1,5 @@
-## Tips for woking w/ AWS EKS
-### List Cluster w/ given version
+# Tips for woking w/ AWS EKS
+## List Cluster w/ given version
 ```bash
 $ VER=<version>
 $ aws eks list-clusters \

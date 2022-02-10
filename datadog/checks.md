@@ -1,4 +1,4 @@
-## Checks
+# Checks
 
 
 cluster 内の監視は endpointschecks
@@ -12,7 +12,7 @@ cluster 外の監視は clusterchecks
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 ```
 
-### ClusterChecks による Checks
+## ClusterChecks による Checks
 Ref: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
 ```yaml
 cluster_check: true
@@ -32,7 +32,7 @@ kubectl exec <ClusterAgent Pod> agent metamap
 kubectl exec <ClusterAgent Pod> agent configcheck
 ```
 
-### Service Annotation による Checks
+## Service Annotation による Checks
 Ref: https://docs.datadoghq.com/ja/agent/cluster_agent/endpointschecks/
 
 annotation

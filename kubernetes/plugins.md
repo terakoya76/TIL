@@ -1,7 +1,7 @@
-## Plugins
+# Plugins
 
-### Frequently Used Plugin Tips
-#### resource-capacity
+## Frequently Used Plugin Tips
+### resource-capacity
 check node resource capacity
 ```bash
 $ k resource-capacity
@@ -11,7 +11,7 @@ ip-10-0-26-3.ap-northeast-1.compute.internal     1478m (76%)    1168m (60%)   24
 ip-10-0-56-225.ap-northeast-1.compute.internal   1834m (95%)    1724m (89%)   3040Mi (23%)      6334Mi (48%)
 ```
 
-#### iexec
+### iexec
 easy to select pod to be execed into
 ```bash
 $ k iexec -A flu
@@ -21,7 +21,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
   Namespace: kube-system | Pod: ▸ fluentd-kbpsn
 ```
 
-#### get-all
+### get-all
 list all obj including objs which are not printed by `k get all`
 ```bash
 $ k get-all
@@ -33,7 +33,7 @@ configmap/cloudwatch-metrics-exporter-env                                       
 (snip)
 ```
 
-#### images
+### images
 ```bash
 $ k images
 [Summary]: 1 namespaces, 2 pods, 2 containers and 1 different images
@@ -46,7 +46,7 @@ $ k images
 +-----------------+---------------+------------------------------+
 ```
 
-#### tree
+### tree
 ```bash
 $ k tree daemonsets.v1.apps fluentd -n kube-system
 NAMESPACE    NAME                                       READY  REASON  AGE
@@ -65,7 +65,7 @@ kube-system  ├─Pod/fluentd-8696t                      True           27d
 kube-system  └─Pod/fluentd-kbpsn                      True           27d
 ```
 
-#### status
+### status
 ```bash
 $ k status ds fluentd -n kube-system
 
@@ -105,7 +105,7 @@ metadata:
   namespace: kube-system
 ```
 
-#### trace
+### trace
 `kprobes/kretprobes, tracepoints, software, hardware, profile events` は node に対して。
 `uprobe/uretprobe, USDT events` は pod に対して trace を掛けるのが推奨される。
 ```bash
@@ -128,7 +128,7 @@ sudo apt install -y apt install linux-headers-5.8.0-26-generic
 ```
 * https://github.com/iovisor/kubectl-trace/issues/76
 
-#### advise-psp
+### advise-psp
 check recommended psp based on our cluster
 ```bash
 $ k advise-psp inspect --report | jq .

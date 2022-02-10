@@ -1,6 +1,6 @@
-## Home k8s
+# Home k8s
 
-### 物理構築
+## 物理構築
 Ref
 * https://developers.cyberagent.co.jp/blog/archives/14721/
 * https://kuromt.hatenablog.com/entry/2018/12/31/151410
@@ -29,7 +29,7 @@ LAN ケーブル 0.15m
 スイッチングハブ 5ポート
 * https://www.amazon.co.jp/gp/product/B00D5Q7V1M
 
-### 論理構築
+## 論理構築
 Ref
 * https://qiita.com/shirot61/items/2321b70cd9c93f8f5cf0
 * https://kuromt.hatenablog.com/entry/2019/01/03/233347
@@ -170,7 +170,7 @@ $ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-### CNI(Cilium)
+## CNI(Cilium)
 mount bpffs
 ```bash
 $ mount bpffs /sys/fs/bpf -t bpf
@@ -188,10 +188,10 @@ use aarch64 adapted images instead of non-dev amd64 images
 v1.9.x image require to be provided `--disable-envoy-version-check` for aarch64
 * https://github.com/cilium/cilium/issues/14117#issuecomment-739104709
 
-### 論理削除
+## 論理削除
 Ref: https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#tear-down
 
-# for worker node
+for worker node
 ```bash
 $ kubectl drain node-0-1 --delete-local-data --force --ignore-daemonsets
 $ kubectl delete node node-0-1
@@ -204,7 +204,7 @@ $ iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 $ rm -r /etc/cni/net.d
 ```
 
-# for master node
+for master node
 ```bash
 $ sudo su -
 $ kubeadm reset

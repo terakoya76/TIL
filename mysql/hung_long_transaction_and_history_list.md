@@ -1,6 +1,5 @@
-## Ref
-- https://www.percona.com/blog/2017/05/08/chasing-a-hung-transaction-in-mysql-innodb-history-length-strikes-back/
-
+# Hung Long Transaction and History List
+Ref: https://www.percona.com/blog/2017/05/08/chasing-a-hung-transaction-in-mysql-innodb-history-length-strikes-back/
 
 ## Intruction for macOS
 ```bash
@@ -26,7 +25,7 @@ $ sysbench $conn $test \
 ### Read/Write Long Txn
 ブログと同様に sysbench から負荷をかけている最中に Transaction を開始して History List の遷移を観察します。
 
-```shell
+```bash
 # Term A
 ## mysql
 $ docker-compose up
@@ -76,7 +75,7 @@ $ echo "TXN-END" >> history_list_write.txt
 結果は Blog 同様に History List が伸びていきました。
 TXN START/END は目安程度に見てください
 
-```shell
+```bash
 $ less history_list_write.txt
 ...
 
@@ -166,7 +165,7 @@ History list length 0
 ### ReadOnly Long Trx
 今度は Long Transaction を Simulate する際に書き込みを行わないことにしてみます。
 
-```shell
+```bash
 # Term A
 ## mysql
 $ docker-compose up
@@ -213,7 +212,7 @@ $ echo "TXN-END" >> history_list_read.txt
 
 結果は先程同様で History List が育ちます。
 まぁ ReadOnly かどうかは Commit/Rollback するまで確定しないので同じ挙動になるのは当然な気もしますが。
-```shell
+```bash
 $ less history_list_read.txt
 ...
 
@@ -286,7 +285,7 @@ History list length 0
 ### ReadCommitted の場合
 Isolation Level を変えると解消されるかも確認しておきます。
 
-```shell
+```bash
 # Term A
 ## my.cnf を変更しておく
 $ docker-compose up
@@ -346,7 +345,7 @@ $ echo "TXN-END" >> history_list_rc.txt
 ```
 
 結果は想定通り History List が育ちませんでした。
-```shell
+```bash
 $ less history_list_rc.txt
 ...
 

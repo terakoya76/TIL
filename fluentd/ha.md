@@ -1,7 +1,7 @@
-## High Availability Configuration
+# High Availability Configuration
 Ref: https://docs.fluentd.org/deployment/high-availability
 
-### Role
+## Role
 * `log forwarders`
   * are typically installed on every node to receive local events.
   * Once an event is received, they forward it to the `log aggregators` through the network.
@@ -10,7 +10,7 @@ Ref: https://docs.fluentd.org/deployment/high-availability
   * are daemons that continuously receive events from the `log forwarders`.
   * They buffer the events and periodically upload the data into the cloud.
 
-### Config
+## Config
 * When the active aggregator (192.168.0.1) dies, the logs will instead be sent to the backup aggregator (192.168.0.2).
 * If both servers die, the logs are buffered on-disk at the corresponding forwarder nodes.
 
@@ -51,8 +51,8 @@ Ref: https://docs.fluentd.org/deployment/high-availability
 </match>
 ```
 
-### Failure Case Scenarios
-#### Forwarder Failure
+## Failure Case Scenarios
+### Forwarder Failure
 When a `log forwarder` receives events from applications, the events are first written into a disk buffer (specified by <buffer>'s path).
 * After every flush_interval, the buffered data is forwarded to aggregators.
 
@@ -64,7 +64,7 @@ However, possible message loss scenarios do exist:
 * The process dies immediately after receiving the events, but before writing them into the buffer.
 * The forwarder's disk is broken, and the file buffer is lost.
 
-#### Aggregator Failure
+### Aggregator Failure
 When `log aggregators` receive events from log forwarders, the events are first written into a disk buffer (specified by <buffer>'s path).
 * After every flush_interval, the buffered data is uploaded to the cloud.
 

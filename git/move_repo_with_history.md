@@ -1,4 +1,4 @@
-## move repo with history
+# move repo with history
 
 ```bash
 $ git clone git@github.com:terakoya76/hoge.git

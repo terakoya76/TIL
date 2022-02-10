@@ -1,4 +1,5 @@
-## daemonize script
+# daemonize script
+
 ```bash
 $ nohup $EXEC_SCRIPT 0<&- &> $LOG_FILE & echo $! > $PID_FILE
 ```

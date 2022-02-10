@@ -1,14 +1,14 @@
-## LLDB
+# LLDB
 
-### Install
+## Install
 ```bash
 $ apt install -y lldb
 ```
 
-### Command Map to GDB
+## Command Map to GDB
 cf. https://lldb.llvm.org/use/map.html
 
-### Debug Already Running Process
+## Debug Already Running Process
 attach
 ```bash
 # attach
@@ -50,7 +50,7 @@ remote debug
 (lldb) gdb-remote eorgadd:8000
 ```
 
-### Debug Local Executable
+## Debug Local Executable
 execute
 ```bash
 # exec a.out with args 1,2,3

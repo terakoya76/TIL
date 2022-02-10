@@ -1,5 +1,5 @@
-## Tips for woking w/ AWS EC2
-### Pickup EC2 InstanceID from private IP
+# Tips for woking w/ AWS EC2
+## Pickup EC2 InstanceID from private IP
 ```bash
 $ aws ec2 describe-instances --filter Name=network-interface.addresses.private-ip-address,Values=${IP} \
 | jq -rc '.Reservations[].Instances[] | [.InstanceId, .PrivateIpAddress]'
@@ -15,7 +15,7 @@ $ cat ip.txt \
 '
 ```
 
-### Pick up tagged ASG
+## Pick up tagged ASG
 ```bash
 $ KEY=<key-name>
 $ VALUE=<value-name>
@@ -26,7 +26,7 @@ $ aws autoscaling describe-auto-scaling-groups | jq --arg KEY ${KEY} --arg VALUE
 '
 ```
 
-### Pickup named ASG
+## Pickup named ASG
 ```bash
 $ NAME=<name>
 $ aws autoscaling describe-auto-scaling-groups | jq --arg NAME ${NAME} '
@@ -35,7 +35,7 @@ $ aws autoscaling describe-auto-scaling-groups | jq --arg NAME ${NAME} '
 '
 ```
 
-### Pick up tagged Instances
+## Pick up tagged Instances
 ```bash
 $ KEY=<key-name>
 $ VALUE=<value-name>
@@ -47,7 +47,7 @@ $ aws ec2 describe-instances --filter Name=tag:${KEY},Values=${VALUE} \
 | jq -rc '.Reservations[].Instances[] | [.InstanceId, .LaunchTime, .State.Name, .NetworkInterfaces[].PrivateIpAddress]'
 ```
 
-### Pickup Instance Summary From ASG Name
+## Pickup Instance Summary From ASG Name
 ```bash
 $ NAME=<asg-name>
 

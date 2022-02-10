@@ -1,5 +1,5 @@
-## Tips for woking w/ AWS Route53
-### List Target Endpoints backed by Name
+# Tips for woking w/ AWS Route53
+## List Target Endpoints backed by Name
 ```bash
 $ ZID=<hosted_zone_id>
 $ Name=<host name>

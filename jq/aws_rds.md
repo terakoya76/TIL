@@ -1,5 +1,5 @@
-## Tips for woking w/ AWS RDS
-### List RDS w/ given identifier
+# Tips for woking w/ AWS RDS
+## List RDS w/ given identifier
 ```bash
 $ DB_PREFIX=<db-prefix>
 $ aws rds describe-db-instances  | jq '.DBInstances[].DBInstanceIdentifier' | grep ${DB_PREFIX}
@@ -8,7 +8,7 @@ $ aws rds describe-db-instances  | jq '.DBInstances[].DBInstanceIdentifier' | gr
 $ aws rds describe-db-instances  | jq '.DBInstances[].DBInstanceIdentifier' | grep ${DB_PREFIX} | xargs -I{} aws rds delete-db-instance --db-instance-identifier {} --skip-final-snapshot
 ```
 
-### Filter RDS Instance by Specific ParameterGroup
+## Filter RDS Instance by Specific ParameterGroup
 instance
 ```bash
 $ aws rds describe-db-instances | jq --arg PG ${PG} '.DBInstances[] | select(.DBParameterGroups[].DBParameterGroupName == $PG) | .DBInstanceIdentifier'
@@ -32,7 +32,7 @@ cluster
 $ aws rds describe-db-clusters | jq --arg CPG ${CPG} '.DBClusters[] | select(.DBClusterParameterGroup == $CPG) | .DBClusterIdentifier'
 ```
 
-### Compare ParameterGroup
+## Compare ParameterGroup
 ```bash
 $ PG1=<parameter-group1 name>
 $ PG2=<parameter-group2 name>
@@ -45,7 +45,7 @@ $ QUERY="Parameters[?ParameterValue!='null'].{ParameterName:ParameterName,Parame
 $ diff -u <(aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name ${CPG1} --query ${QUERY} | jq -r 'sort_by(.ParameterName)') <(aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name ${CPG2} --query ${QUERY} | jq -r 'sort_by(.ParameterName)')
 ```
 
-### Check Instance Class Stats
+## Check Instance Class Stats
 ```bash
 # 一覧
 $ aws rds describe-db-instances | jq -c '.DBInstances[] | [.DBInstanceIdentifier, .DBInstanceClass]'
@@ -64,7 +64,7 @@ $ aws rds describe-db-instances | jq -c '.DBInstances[] | select(.DBInstanceClas
 $ aws rds describe-db-instances | jq -c '.DBInstances[] | select(.TagList | any(.Key == "Project") | not) | [.DBInstanceIdentifier, .DBInstanceClass, .MultiAZ]'
 ```
 
-### Change Instance Class
+## Change Instance Class
 ```bash
 $ BEFORE="db.t2.small"
 $ AFTER="db.t3.small"

@@ -1,8 +1,8 @@
-## Dstat
+# Dstat
 
 for python3: https://github.com/scottchiefbaker/dool
 
-### Summary
+## Summary
 
 ```bash
 # for all at a glance

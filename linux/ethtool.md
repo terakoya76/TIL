@@ -1,6 +1,6 @@
-## ethtool
+# ethtool
 
-### Summary
+## Summary
 
 ```bash
 $ ethtool -S enp0s3

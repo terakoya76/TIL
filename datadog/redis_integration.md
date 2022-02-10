@@ -1,4 +1,4 @@
-## Redis Integration
+# Redis Integration
 Ref: https://www.datadoghq.com/ja/blog/monitor-redis-using-datadog/
 
 情報は `Redis.info` から取得しているっぽい

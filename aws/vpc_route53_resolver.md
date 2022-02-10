@@ -1,7 +1,7 @@
-## Resolver for Route53 in VPC
+# Resolver for Route53 in VPC
 VPC 内での Route53 CNAME 変更反映速度が少し気になったので調査
 
-### 状況
+## 状況
 * VPC
   * ネットワークレンジは `172.30.0.0/16`
   * DNS-enabled
@@ -9,7 +9,7 @@ VPC 内での Route53 CNAME 変更反映速度が少し気になったので調�
   * RDS Endpoint の CNAME を management console から変更
   * TTL1
 
-### 現象
+## 現象
 ```bash
 $ max=120
 $ for ((i=0; i < $max; i++)); do
@@ -363,11 +363,11 @@ Wed May  6 09:37:18 UTC 2020
 mm-test-1.xxxx.ap-northeast-1.rds.amazonaws.com.
 ```
 
-### 原因？
+## 原因？
 * vpc 内の stub/権威の問い合わせロジックに変なトリックがある説
 * r53 自体への反映遅延がある説
 
-## Resolver 調査
+### Resolver 調査
 同一 VPC の EC2 Instance に SSH
 dig を見ると `127.0.0.53:53` に問い合わせており、確認してみると `systemd-resolved` に問い合わせを行っていることがわかる。
 ```bash
@@ -657,7 +657,7 @@ Wed May  6 10:49:41 UTC 2020
 mm-test-2.xxxx.ap-northeast-1.rds.amazonaws.com.
 ```
 
-## r53 自体への反映遅延がある説
+### r53 自体への反映遅延がある説
 Ref https://aws.amazon.com/jp/route53/faqs/
 
 こっちが濃厚か

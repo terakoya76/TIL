@@ -1,4 +1,4 @@
-## MONyog Disk Space Shortage
+# MONyog Disk Space Shortage
 
 EBS が2つ attach されており、`/data` 下のスペースが減っていることがわかる
 ```bash

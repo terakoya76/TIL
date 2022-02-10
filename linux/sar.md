@@ -1,14 +1,14 @@
-## sar
+# sar
 
-### Summary
+# Summary
 ```bash
 $ sar [opt ...]
 ```
 
-### CPU
+## CPU
 * `-q` run queue statistics
 
-### Memory
+## Memory
 * `-B` page statistics
 * `-H` huge page statistics
 * `-r` memory utilization
@@ -17,13 +17,13 @@ $ sar [opt ...]
 * `-S` swap space statistics
 * `-W` swapping statistics
 
-### FS
+## FS
 * `-v` system table statistics
 
-### Disk
+## Disk
 * `-d` disk statistics
 
-### Network
+## Network
 * `-n DEV` network interface statistics
 * `-n EDEV` network interface errors
 * `-n IP,IP6` IPv4 and IPv6 datagram statistics

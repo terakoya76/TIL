@@ -1,6 +1,6 @@
-## kubectl
+# kubectl
 
-### run
+## run
 entrypoint override (`command`)
 ```bash
 $ image=quay.io/iovisor/kubectl-trace-bpftrace

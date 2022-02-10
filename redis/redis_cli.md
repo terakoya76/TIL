@@ -1,7 +1,7 @@
-## redis-cli
+# redis-cli
 Ref: https://redis.io/commands/
 
-### Client List
+## Client List
 ```bash
 $ redis-cli -h $REDIS_HOST client list | awk '{print $2}' | cut -d: -f1 | cut -d= -f2 | sort | uniq -c
 ```
@@ -14,7 +14,7 @@ $ cat client.txt | awk '{ print $2 }' | xargs -I{} aws ec2 describe-instances --
 $ join -o 1.1,1.2,2.2 -1 2 -2 1 client.txt role.txt
 ```
 
-### Summarize Prefix
+## Summarize Prefix
 keys only for debug
 ```bash
 $ redis-cli -h $REDIS_HOST keys * | cut -d: -f1-2 | sort | uniq -c

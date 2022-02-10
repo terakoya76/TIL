@@ -1,4 +1,4 @@
-## Enabling GTID Transactions Online
+# Enabling GTID Transactions Online
 Ref: https://dev.mysql.com/doc/refman/5.7/en/replication-mode-change-online-enable-gtids.html
 
 1. on each server

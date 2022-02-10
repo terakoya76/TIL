@@ -1,4 +1,4 @@
-## Type Conflict
+# Type Conflict
 すでに作られてしまった mappings は更新できないので、希望する mappings を持つ新しい index を作って、reindex を掛けるしかない
 
 ```bash
