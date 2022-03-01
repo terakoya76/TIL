@@ -1,6 +1,6 @@
-## Dual Master Replication
+# Dual Master Replication
 
-### Infinite Loop
+## Infinite Loop
 Ref: https://www.percona.com/blog/2011/10/10/infinite-replication-loop/
 
 `--replicate-same-server-id` が無効の場合、slave はそれ自身の server ID を持つ binlog event をスキップする。

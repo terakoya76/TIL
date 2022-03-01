@@ -1,5 +1,5 @@
-## lvm
-### Mount FS from the attached volumes
+# lvm
+## Mount FS from the attached volumes
 volume `xvdf, xvdg, xvdh` が attach されていることを確認
 ```bash
 $ lsblk

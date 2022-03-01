@@ -1,7 +1,7 @@
-## kind
+# kind
 Ref: https://kind.sigs.k8s.io/docs/user/quick-start/
 
-### quick install
+## quick install
 ```bash
 $ GO111MODULE="on" go get sigs.k8s.io/kind@v0.9.0
 
@@ -12,7 +12,7 @@ $ kind create cluster
 $ kind create cluster --loglevel debug
 ```
 
-### install from the configuration
+## install from the configuration
 config
 ```yaml
 kind: Cluster
@@ -27,7 +27,7 @@ designate config
 $ kind create cluster --config kind.yaml
 ```
 
-### Mapping FS
+## Mapping FS
 ```bash
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -53,7 +53,7 @@ nodes:
     hostPath: /mnt/test
 ```
 
-### Mapping Ports
+## Mapping Ports
 ```bash
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -66,7 +66,7 @@ nodes:
     protocol: udp # Optional, defaults to tcp
 ```
 
-### Enable Feature Gate
+## Enable Feature Gate
 ```bash
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -76,7 +76,7 @@ nodes:
 - role: control-plane
 ```
 
-### Self Hosted Image
+## Self Hosted Image
 ```bash
 # run local private registry
 $ docker run -d -p 5000:5000 registry

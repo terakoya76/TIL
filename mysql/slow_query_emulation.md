@@ -1,4 +1,4 @@
-## Slow Query Emulation
+# Slow Query Emulation
 
 Ref: https://qiita.com/rubytomato@github/items/acc3bf064b3ceff406d4
 

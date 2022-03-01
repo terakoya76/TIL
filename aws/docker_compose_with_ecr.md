@@ -1,4 +1,4 @@
-## docker-compose w/ ECR image
+# docker-compose with ECR image
 Ref: https://docs.aws.amazon.com/ja_jp/AmazonECR/latest/userguide/common-errors-docker.html
 
 ```bash

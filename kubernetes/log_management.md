@@ -1,7 +1,7 @@
-## Log Management for Container stdout/stderr streams
+# Log Management for Container stdout/stderr streams
 Ref: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/node/kubelet-cri-logging.md
 
-### Current
+## Current
 Log lifecycle and management
 > Docker deletes the log files when the container is removed, and a cron-job (or systemd timer-based job) on the node is responsible to rotate the logs (using logrotate).
 > To preserve the logs for introspection and debuggability, kubelet keeps the terminated container until the pod object has been deleted from the apiserver.
@@ -20,7 +20,7 @@ Cluster logging support
 > The fluentd daemon watches the /var/log/containers/ directory and extract the metadata associated with the log from the path.
 > Note that this integration requires kubelet to know where the container runtime stores the logs, and will not be directly applicable to CRI
 
-### Proposal
+## Proposal
 requirements
 * Provide ways for CRI-compliant runtimes to support all existing logging features, i.e., kubectl logs.
 * Allow kubelet to manage the lifecycle of the logs to pave the way for better disk management in the future. This implies that the lifecycle of containers and their logs need to be decoupled.
@@ -31,7 +31,7 @@ poposal
 * Ask the runtime to decorate the logs in a format that kubelet understands.
 `/var/log/pods/<podUID>/<containerName>_<instance#>.log`
 
-### Log Rotation on EKS
+## Log Rotation on EKS
 Ref: https://github.com/awslabs/amazon-eks-ami/blob/v20210310/files/docker-daemon.json#L4-L7
 
 docker logging driver option により log rotate している

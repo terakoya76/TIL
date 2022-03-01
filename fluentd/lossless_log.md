@@ -1,4 +1,4 @@
-## Lossless Log
+# Lossless Log
 
 Ref:
 * http://blog.livedoor.jp/sonots/archives/44690980.html?ref=popular_article&id=5419188-3748581
@@ -12,7 +12,7 @@ fluentd documentation
 前提
 * ulimit の調整
 
-### 0.12 compat
+## 0.12 compat
 ```xml
 <source>
   @type tail
@@ -101,7 +101,7 @@ fluentd documentation
 </match>
 ```
 
-### v1
+## v1
 ```xml
 <source>
   @type tail

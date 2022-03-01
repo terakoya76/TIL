@@ -1,4 +1,4 @@
-## arproxy により SQL に context を埋め込む
+# arproxy により SQL に context を埋め込む
 * https://github.com/cookpad/arproxy
 
 ### How to embed
@@ -12,7 +12,7 @@ class ContextAttacher < Arproxy::Base
 end
 ```
 
-### How to extract
+## How to extract
 ```ruby
 ctx_re = %r{/\* ctx=(.*) \*/\z}
 matched = sql.match(ctx_re)

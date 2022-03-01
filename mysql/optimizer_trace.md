@@ -1,6 +1,6 @@
-## Optimizer Trace
+# Optimizer Trace
 
-### SHOW STATUS VARIABLES LIKE 'HANDLER_%'
+## SHOW STATUS VARIABLES LIKE 'HANDLER_%'
 https://fromdual.com/mysql-handler-read-status-variables
 
 ```sql
@@ -12,7 +12,7 @@ mysql> SELECT * FROM users;
 mysql> SHOW STATUS VARIABLES LIKE 'HANDLER_%';
 ```
 
-### Optimizer Trace
+## Optimizer Trace
 有効化
 ```sql
 mysql> show variables like 'optimizer_trace';

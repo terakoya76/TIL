@@ -1,8 +1,7 @@
-## lsof
-
+# lsof
 Ref: https://orebibou.com/ja/home/201604/20160422_001/
 
-### Summary
+## Summary
 
 ```bash
 $ lsof
@@ -58,12 +57,12 @@ systemd       1           root    1u      CHR                1,3       0t0      
 * NODE: プロトコル
 * NAME: ファイルまたはポート
 
-### Command 指定
+## Command 指定
 ```bash
 $ lsof -c python
 ```
 
-### User 指定
+## User 指定
 ```bash
 $ lsof -u app
 ```

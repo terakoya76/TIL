@@ -1,4 +1,4 @@
-## drift check
+# drift check
 
 plan all-dirs and detect non-zero return project
 ```bash

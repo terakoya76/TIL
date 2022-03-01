@@ -1,4 +1,4 @@
-## CGO
+# CGO
 Ref: https://golang.org/cmd/cgo/
 
 cgo directive で FLAG 指定
@@ -10,19 +10,19 @@ cgo directive で FLAG 指定
 import "C"
 ```
 
-### GC between C and GO
+## GC between C and GO
 Ref: https://github.com/shazow/gohttplib/blob/master/ptrproxy.go
 
 go で作った object への pointer を C に渡した場合、go 側で GC が走ると SEGV する。
 そのため上記のように、go 側で resource id と pointer の map を作り、C には resource id を渡すといった工夫が必要
 
-### C reference to GO
+## C reference to GO
 Ref: https://golang.org/cmd/cgo/#hdr-C_references_to_Go
 
-### GO reference to C
+## GO reference to C
 Ref: https://golang.org/cmd/cgo/#hdr-Go_references_to_C
 
-### c-shared と c-archive
+## c-shared と c-archive
 Ref: https://golang.org/cmd/go/#hdr-Build_modes
 
 ```
@@ -39,13 +39,13 @@ Ref: https://golang.org/cmd/go/#hdr-Build_modes
 	Requires exactly one main package to be listed.
 ```
 
-#### Static library 経由で C から GO のコードを実行する
+### Static library 経由で C から GO のコードを実行する
 Ref: https://medium.com/@ben.mcclelland/an-adventure-into-cgo-calling-go-code-with-c-b20aa6637e75
 
-#### C shared library 経由で多言語から GO のコードを実行する
+### C shared library 経由で多言語から GO のコードを実行する
 Ref: https://medium.com/learning-the-go-programming-language/calling-go-functions-from-other-languages-4c7d8bcc69bf
 
-### C library を GO にリンク（C reference to GO）
+## C library を GO にリンク（C reference to GO）
 Ref: https://qiita.com/yugui/items/e71d3d0b3d654a110188
 
 > まずグルーコードを生成する。それからCの世界はCコンパイラ/リンカに任せてすべての依存関係を解決させ、_cgo_.oを作る。次に、_cgo_.oを解析して_cgo_import.goのためのデータを抽出する。
@@ -74,5 +74,5 @@ Ref: https://qiita.com/yugui/items/e71d3d0b3d654a110188
   * `go tool link -o example example1.a`
   * アーカイブ内の Object や依存ライブラリの Object をリンクする
 
-### C library を GO にリンク（GO reference to C）
+## C library を GO にリンク（GO reference to C）
 Ref: https://qiita.com/yugui/items/cc490d080e0297251090

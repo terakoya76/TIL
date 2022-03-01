@@ -1,6 +1,6 @@
-## Terraform MonoRepo Version Update
+# Terraform MonoRepo Version Update
 
-### show proj and its terraform version
+## show proj and its terraform version
 ```bash
 $ find . -type f -name .terraform-version \
 | xargs  -I{}  bash -c 'echo -n "{} - "; cat {}' \
@@ -15,7 +15,7 @@ $ find . -type f -name .terraform-version \
 | sort
 ```
 
-### find proj which does not have `required_providers` setting
+## find proj which does not have `required_providers` setting
 * https://github.com/terraform-linters/tflint/blob/master/docs/rules/terraform_required_version.md
 * https://github.com/terraform-linters/tflint/blob/master/docs/rules/terraform_required_providers.md
 * https://github.com/terraform-linters/tflint/blob/master/docs/rules/terraform_unused_required_providers.md
@@ -27,7 +27,7 @@ $ find . -type f -name provider.tf \
 | sort
 ```
 
-### show proj and its aws-provider version
+## show proj and its aws-provider version
 ```bash
 $ find . -type f -name provider.tf \
 | xargs  -I{}  bash -c 'echo -n "{} "; grep -E "\s+version" {} | xargs echo -n; echo ""' \
@@ -43,7 +43,7 @@ $ find . -type f -name provider.tf \
 | sort
 ```
 
-### update all `0.12.x` proj upto `0.13.x`
+## update all `0.12.x` proj upto `0.13.x`
 * https://github.com/minamijoyo/tfupdate
 
 ```bash
@@ -68,7 +68,7 @@ $ for proj in `cat updated.txt`; do echo "0.13.5" > ${proj}/.terraform-version; 
 $ for proj in `cat updated.txt`; do pushd ${proj}; rm -rf .terraform; terraform init; terraform fmt -recursive; popd; done
 ```
 
-### lint all projects
+## lint all projects
 ```bash
 $ result_path=~/lint.txt
 $ root=$(pwd)
@@ -82,7 +82,7 @@ do
 done
 ```
 
-### fetch remote module updates
+## fetch remote module updates
 * https://github.com/keilerkonzept/terraform-module-versions
 ```bash
 $ result_path=~/updates.txt

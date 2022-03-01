@@ -1,4 +1,4 @@
-## datadog-archive した logs を athena から query 可能にする
+# datadog-archive した logs を athena から query 可能にする
 
 Ref: Partition Projection を利用する
 * https://dev.classmethod.jp/articles/20200627-amazon-athena-partition-projection/

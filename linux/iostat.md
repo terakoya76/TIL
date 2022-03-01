@@ -1,6 +1,6 @@
-## iostat
+# iostat
 
-### Summary
+## Summary
 
 ```bash
 $ iostat -dxz 1
@@ -15,12 +15,12 @@ sda              4.49    165.92     0.96  17.62    0.43    36.96    8.82   1165.
 sdb              0.07      0.66     0.00   0.00    0.21     9.88    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00   0.00
 ```
 
-option
+### Option
 * `-d` disk utilization only
 * `-x` extended column
 * `-z` skipping devices w/ zero metrics
 
-result
+### Result
 * `rrqm/s` read request queued and merged per second
 * `wrqm/s` write request queued and merged per second
 * `r/s` read requests completed per second (after merges)

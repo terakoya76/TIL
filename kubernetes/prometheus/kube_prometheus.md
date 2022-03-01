@@ -1,4 +1,4 @@
-## kube-prometheus
+# kube-prometheus
 Ref: https://github.com/prometheus-operator/kube-prometheus
 
 ```bash

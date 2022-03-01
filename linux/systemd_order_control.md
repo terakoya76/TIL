@@ -1,3 +1,4 @@
+# Systemd Order Control
 ## Summary
 mackerel-agent より先に監視対象の unit が shutdown して誤報アラートが飛んでしまうのを防ぐ
 つまり監視対象が立ち上がってから mackerel-agent が立ち上がるようにすれば、mackerel-agent が shutdown してから監視対象が shutdown するようになる。

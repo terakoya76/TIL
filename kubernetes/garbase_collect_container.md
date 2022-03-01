@@ -1,4 +1,4 @@
-## GC for Container
+# GC for Container
 
 Ref: https://kubernetes.io/docs/concepts/cluster-administration/kubelet-garbage-collection/#user-configuration
 
@@ -8,7 +8,7 @@ A sufficiently large value for maximum-dead-containers-per-container is highly r
 A larger value for maximum-dead-containers is also recommended for a similar reason.
 cf. https://github.com/kubernetes/kubernetes/issues/13287
 
-### Image GC
+## Image GC
 * `image-gc-high-threshold`
   * the percent of disk usage which triggers image garbage collection.
   * Default is 85%.
@@ -16,7 +16,7 @@ cf. https://github.com/kubernetes/kubernetes/issues/13287
   * the percent of disk usage to which image garbage collection attempts to free.
   * Default is 80%.
 
-### Logs
+## Logs
 * `minimum-container-ttl-duration`
   * minimum age for a finished container before it is garbage collected.
   * Default is 0 minute, which means every finished container will be garbage collected.
@@ -27,6 +27,6 @@ cf. https://github.com/kubernetes/kubernetes/issues/13287
   * maximum number of old instances of containers to retain globally.
   * Default is -1, which means there is no global limit.
 
-### Configure on EKS
+## Configure on EKS
 cf. https://aws.amazon.com/jp/premiumsupport/knowledge-center/eks-worker-nodes-image-cache/
 

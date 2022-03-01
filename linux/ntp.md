@@ -1,11 +1,11 @@
-## NTP
+# NTP
 
 cf. https://milestone-of-se.nesuke.com/l7protocol/ntp/ntp-summary/
 
-### NTP とは
+## NTP とは
 IP 機器が自動で時間を調整するために使うプロトコル
 
-### Startum
+## Startum
 時計からの距離
 * 原子時計や GPS 等の高信頼性の時計自体を Stratum 0と定義する
 * startum 0 と (ネットワーク越しではなく) 物理的に直結している NTP server が Stratum 1 となる
@@ -14,7 +14,7 @@ IP 機器が自動で時間を調整するために使うプロトコル
   * Stratum 2～15 の NTP server を Secondary server と呼ぶ
   * 16以上は信頼できない時刻ソースとされ、利用できない
 
-### Protocol
+## Protocol
 複数台の NTP server から時刻を取得し、まずは明らかに時刻の外れているものがあればそれを除外します。
 そして次に残った時刻ソースから、精度が高いと思われるものを3つ選び、それを使って時刻修正を行います
 

@@ -1,8 +1,7 @@
-## IP Block with Stackprof
-
+# IP Block with Stackprof
 Ref: https://totem3.hatenablog.jp/entry/2019/01/07/215807
 
-### Error Stacktrace
+## Error Stacktrace
 
 handle_interrupt が呼ばれているので、stackprof の wall mode timer によって割り込まれて connection が終了してしまうという記事中の現象に酷似している
 ```
@@ -32,7 +31,7 @@ from vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connec
 * https://github.com/brianmario/mysql2/blob/0.4.10/lib/mysql2/client.rb#L119-L121
 * https://docs.ruby-lang.org/ja/latest/class/Thread.html#S_HANDLE_INTERRUPT
 
-### Reproduce
+## Reproduce
 wall mode で重い処理を走らせる
 ```ruby
 StackProf.run(mode: :wall, raw: true, out: dir.join('cpu.dump').to_s) do
@@ -119,7 +118,7 @@ COUNT_MAX_USER_CONNECTIONS_PER_HOUR_ERRORS: 0
 1 row in set (0.00 sec)
 ```
 
-### Verification
+## Verification
 strace すると profile 開始後から `SIGALRM` が飛ぶのを確認
 ```bash
 $ sudo strace -p 10685
@@ -237,7 +236,7 @@ $ sudo tcpdump -tttt -l -i ens5 -n -s 0 dst port 3306
 2020-12-10 23:39:06.974418 IP 10.1.64.49.50494 > 10.1.224.239.3306: Flags [S], seq 3865037642, win 26883, options [mss 8961,sackOK,TS val 13729447 ecr 0,nop,wscale 7], length 0
 ```
 
-### Mitigation
+## Mitigation
 1. mode cpu で profile を取る
 ```ruby
 StackProf.run(mode: :cpu, raw: true, out: dir.join('cpu.dump').to_s) do

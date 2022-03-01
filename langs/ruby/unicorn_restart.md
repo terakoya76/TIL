@@ -1,4 +1,4 @@
-## Unicorn Restart
+# Unicorn Restart
 
 Normal Restart
 ```bash

@@ -1,4 +1,4 @@
-## Warmup MySQL
+# Warmup MySQL
 
 password を client 側の設定ファイルに記載
 ```bash

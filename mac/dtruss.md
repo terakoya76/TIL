@@ -1,4 +1,4 @@
-## dtruss
+# dtruss
 dtruss を使うために SIP を無効化して DTrace が使えるようにする必要がある
 ```bash
 $ sudo  csrutil status

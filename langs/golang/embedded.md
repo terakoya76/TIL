@@ -1,4 +1,4 @@
-## embedded
+# embedded
 implement interface by embedded
 ```go
 type UserInterface interface {

@@ -1,4 +1,4 @@
-## Summary
+# Summary
 1. INDEX Page
    * FSEG Header
 2. INODE Page
@@ -10,27 +10,27 @@
 4. Extent
    * Page
 
-## Data Structure
-### FSEG: File Segment
+# Data Structure
+## FSEG: File Segment
 
-### FIL Header: File Header
+## FIL Header: File Header
 
-### FIL Trailer: File Trailer
+## FIL Trailer: File Trailer
 
-### FSP_HDR: File Space Header
+## FSP_HDR: File Space Header
 containing FSP header structure, which tracks things like
 * the size of the space
 * lists of free, fragmented, and full extents
 
-### XDES: Extent Descriptor
+## XDES: Extent Descriptor
 
-### Extent
+## Extent
 * pages are grouped into blocks of 1 MiB
 
-### IBUF_BITMAP
+## IBUF_BITMAP
 which is used for bookkeeping information related to insert buffering
 
-### INODE
+## INODE
 
 ## Size
 * One extent size                                 = 1 MB

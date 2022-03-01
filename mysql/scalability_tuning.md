@@ -1,7 +1,7 @@
-## Scalability Tuning
+# Scalability Tuning
 Ref: https://www.slideshare.net/yasufumikinoshita10/inno-db-deeptalk2
 
-### Innodb 以外の設定
+## Innodb 以外の設定
 I/O Scheduler
 * elevator = deadline
 * mount option = noatime
@@ -22,7 +22,7 @@ my.cnf
 allocator
 * jemalloc
 
-### Innodb の設定
+## Innodb の設定
 * innodb_flush_method = O_DIRECT
   * データファイルアクセスにメモリを無駄に食わないため
 * innodb_doublewrite = false

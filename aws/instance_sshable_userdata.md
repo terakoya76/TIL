@@ -1,4 +1,4 @@
-## instanct sshable userdata
+# instanct sshable userdata
 Ref: https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-user-account-cloud-init-user-data/
 
 ```bash

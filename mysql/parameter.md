@@ -1,7 +1,7 @@
 # my.cnf
 Ref: https://dev.mysql.com/doc/refman/5.6/ja/server-system-variables.html
 
-# client
+## client
 ```my.cnf
 [mysql]
 prompt = '\\u@\\h [\\d] > '
@@ -13,7 +13,7 @@ ssl-cipher = 'DEFAULT:!EDH:!DHE'
 pager = 'less -R'
 ```
 
-### safe_updates = 1
+## safe_updates = 1
 以下の変数を有効化する
 * sql_safe_updates=1
   * WHERE/LIMIT で絞っていない UPDATE/DELETE を防ぐ

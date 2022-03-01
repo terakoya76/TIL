@@ -1,5 +1,5 @@
-## fluend conf example
-### Collect from Docker socket
+# fluend conf example
+## Collect from Docker socket
 ```xml
 @include "#{ENV['FLUENTD_SYSTEMD_CONF'] || 'systemd'}.conf"
 @include "#{ENV['FLUENTD_PROMETHEUS_CONF'] || 'prometheus'}.conf"
@@ -18,7 +18,7 @@
 </source>
 ```
 
-### Concat
+## Concat
 Ref: https://github.com/fluent-plugins-nursery/fluent-plugin-concat
 
 ```xml
@@ -41,7 +41,7 @@ Ref: https://github.com/fluent-plugins-nursery/fluent-plugin-concat
 </label>
 ```
 
-### Parser
+## Parser
 Ref: https://docs.fluentd.org/parser
 
 ```xml
@@ -64,7 +64,7 @@ Ref: https://docs.fluentd.org/parser
 </label>
 ```
 
-### Record Transformer
+## Record Transformer
 Ref: https://docs.fluentd.org/filter/record_transformer
 
 embed s3 dest info
@@ -79,7 +79,7 @@ embed s3 dest info
 </filter>
 ```
 
-### Rewrite Tag
+## Rewrite Tag
 Ref: https://github.com/fluent/fluent-plugin-rewrite-tag-filter
 
 ```xml
@@ -97,7 +97,7 @@ Ref: https://github.com/fluent/fluent-plugin-rewrite-tag-filter
 </match>
 ```
 
-### Copy and Relabel
+## Copy and Relabel
 Ref:
 * https://docs.fluentd.org/output/copy
 * https://docs.fluentd.org/output/relabel
@@ -117,7 +117,7 @@ Ref:
 </match>
 ```
 
-### S3 Out
+## S3 Out
 Ref: https://docs.fluentd.org/output/s3
 
 ```xml
@@ -203,7 +203,7 @@ Ref: https://docs.fluentd.org/output/s3
 </label>
 ```
 
-### fluentd-kubernetes-daemonset
+## fluentd-kubernetes-daemonset
 Ref: https://github.com/fluent/fluentd-kubernetes-daemonset
 
 tail source

@@ -1,6 +1,6 @@
-## nicstat
+# nicstat
 
-### Summary
+## Summary
 network interface statistics
 modeld on `iostat(1)`
 

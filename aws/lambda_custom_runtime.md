@@ -1,6 +1,6 @@
-## Lambda Custom Runtime
+# Lambda Custom Runtime
 
-### Bash Runtime
+## Bash Runtime
 Ref: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html
 
 Dockerfile
@@ -61,7 +61,7 @@ function handler () {
 }
 ```
 
-### Runtime Interface Emulator
+## Runtime Interface Emulator
 
 ```Dockerfile
 FROM alpine:3.13.0

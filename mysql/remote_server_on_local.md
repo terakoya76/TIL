@@ -1,5 +1,5 @@
-## VM 上に MySQL を構築
-### VM 定義
+# VM 上に MySQL を構築
+## VM 定義
 ```Vagrantfile
 Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-18.04"
@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-### MySQL 設定
+## MySQL 設定
 Setup
 ```bash
 $ vagrant up
@@ -48,7 +48,7 @@ mysql> SHOW GRANTS FOR myuser;
 1 row in set (0.00 sec)
 ```
 
-### local から VM 上の MySQL にアクセス
+## local から VM 上の MySQL にアクセス
 ```bash
 $ mysql -h127.0.0.1 -umyuser -pmypassword -P33060
 myuser@127.0.0.1 [(none)] > select * from performance_schema.host_cache\G

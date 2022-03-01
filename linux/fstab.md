@@ -1,4 +1,4 @@
-## fstab
+# fstab
 similar to `mount`
 mount device along w/ the `/etc/fstab` configuration
 

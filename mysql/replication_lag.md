@@ -1,4 +1,4 @@
-## Replication Lag
+# Replication Lag
 
 Ref:
 * https://dev.mysql.com/doc/refman/8.0/en/faqs-replication.html#faq-replication-how-compare-replica-date
@@ -10,10 +10,10 @@ replication SQL thread が source から読み込んだ event を実行すると
 replica が1時間 source から切断された後に再接続した場合、`SHOW PROCESSLIST` の replication SQL thread に 3600 のような大きな Time 値がすぐに表示される可能性があることに注意してください。
 これは、replica が1時間前の statement を実行しているためです。
 
-### Identify Replication Lag
+## Identify Replication Lag
 Ref: https://www.percona.com/blog/2014/05/02/how-to-identify-and-cure-mysql-replication-slave-lag/
 
-#### Identify
+### Identify
 IO Thread
 `SHOW MASTER STATUS - SHOW SLAVE STATUS`
 * Master_Log_File
@@ -22,7 +22,7 @@ IO Thread
 SQL Thread
 `Read_Master_Log_Pos - Exec_Master_Log_Pos`
 
-#### Cause Detection
+### Cause Detection
 IO Thread
 * the slow network between master/slave.
   * enabling `slave_compressed_protocol` helps to mitigate

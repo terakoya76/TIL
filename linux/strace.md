@@ -1,4 +1,4 @@
-## strace
+# strace
 Ref: http://blog.livedoor.jp/sonots/archives/18193659.html
 
 system call の統計情報を取得

@@ -1,4 +1,4 @@
-## Resize Volume on EC2
+# Resize Volume on EC2
 Ref: https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html
 
 ```bash

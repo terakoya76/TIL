@@ -1,4 +1,4 @@
-## ArgoCD CLI
+# ArgoCD CLI
 
 login
 ```bash

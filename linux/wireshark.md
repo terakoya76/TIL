@@ -1,6 +1,6 @@
-## Wireshark tips
+# Wireshark tips
 
-### Display Filter
+## Display Filter
 SYN Flag
 `tcp.flags.syn==1`
 

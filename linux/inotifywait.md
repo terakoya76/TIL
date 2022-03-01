@@ -1,11 +1,11 @@
-## inotifywait
+# inotifywait
 
-### Install
+## Install
 ```bash
 $ apt update && apt install -y inotify-tools
 ```
 
-### Usage
+## Usage
 inode に変更入る場合（recreate）、`-e modify` だと event を拾えない。
 `-e attrib` を使うと拾える。
 
