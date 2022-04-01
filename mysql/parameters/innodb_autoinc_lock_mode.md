@@ -1,5 +1,7 @@
 # Auto Increment
-Ref: https://dev.mysql.com/doc/refman/5.6/ja/innodb-auto-increment-handling.html
+Ref:
+* https://dev.mysql.com/doc/refman/5.6/ja/innodb-auto-increment-handling.html
+* https://forums.percona.com/t/pt-online-schema-change-deadlock-found-when-trying-to-get-lock-lock-mode-auto-inc-wait/7896
 
 ## 定義
 ### INSERT のような statement
@@ -27,6 +29,9 @@ INSERT INTO t1 (c1,c2) VALUES (1,'a'), (NULL,'b'), (5,'c'), (NULL,'d');
 * このような失われた値は再使用されません。したがって、テーブルの AUTO_INCREMENT column に格納されている値にはギャップが存在する可能性があります。
 
 ## autoinc lock mode
+
+innodb_autoinc_lock_mode parameter
+
 ### 従来
 すべての 「INSERT のような」statement では、特殊な table level AUTO-INC lock が取得され、statement の終了まで保持されます。
 * これにより、特定の statement によって割り当てられた自動 increment 値が連続的になります。
