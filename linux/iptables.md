@@ -1,8 +1,8 @@
 # iptables memo
-Ref:
-- https://oxynotes.com/?p=6361
-- http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-ja-4/s1-iptables-options.html
-- http://www.asahi-net.or.jp/~aa4t-nngk/ipttut/output/ipttut_all.html
+Ref: http://www.asahi-net.or.jp/~aa4t-nngk/ipttut/output/ipttut_all.html
+
+## Summary
+Ref: https://christina04.hatenablog.com/entry/iptables-outline
 
 ## Chain Type
 | Chain Type        | Description                                                                                |
@@ -22,7 +22,10 @@ Ref:
 | Rawテーブル    | PREROUTING、OUTPUT                              | mangleテーブルのように特定のパケットにマークを付けることですが、Rawテーブルでは追跡を除外するようマークを付けます。つまり、特定の通信をファイアウォールで処理せずに他の機材へ通したりといった経路制御する場合に利用します。 |
 
 ## Command
-command
+Ref
+* http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-ja-4/s1-iptables-options.html
+* https://linuxjf.osdn.jp/JFdocs/NAT-HOWTO-6.html
+
 | Command              | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
 | -A（--append）       | 指定チェインに1つ以上の新しいルールを追加                             |
@@ -47,6 +50,37 @@ parameter
 | -j (--jump)          | ターゲット（ACCEPT、DROP、REJECT）を指定                                                            |
 | -m（--match）        | 使用したい比較オプションモジュールを指定する                                                        |
 
+NAT Table 一覧確認
+```bash
+$ sudo iptables -t nat -L
+
+# counter 表示
+$ sudo iptables -t nat -L -v
+```
+
+DNAT
+```bash
+$ sudo iptables -t nat -A PREROUTING -d 10.0.0.8 -j DNAT --to-destination 10.0.0.9
+```
+
+SNAT
+```bash
+$ sudo iptables -t nat -A POSTROUTING -d 10.0.0.8 -j SNAT --to-source 10.0.0.9
+```
+
+Connection Mangle
+```bash
+$ sudo iptables -t mangle -A PREROUTING -j CONNMARK --restore-mark
+$ sudo iptables -t mangle -A PREROUTING -i eth0 -j MARK --set-mark 10
+$ sudo iptables -t mangle -A PREROUTING -j CONNMARK --save-mark
+```
+
+Rule 削除
+```bash
+$ sudo iptables -t nat -L --line-numbers
+$ sudo iptables -t nat -D PREROUTING 1
+```
+
 ## User Defined Chain
 ```bash
 # 新規 Chain の追加
@@ -55,6 +89,23 @@ $ iptables -N dropchain
 $ iptables -A dropchain -j DROP
 # 80番への incoming traffic は dropchain に飛ばす（drop する）
 $ iptables -A INPUT --dport 80 -j dropchain
+```
+
+### Logging Drop Packets
+input packet
+```bash
+$ iptables -N LOGGING
+$ iptables -A INPUT -j LOGGING
+$ iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
+$ iptables -A LOGGING -j DROP
+```
+
+output packet
+```bash
+$ iptables -N LOGGING
+$ iptables -A OUTPUT -j LOGGING
+$ iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
+$ iptables -A LOGGING -j DROP
 ```
 
 ## Matching Module

@@ -4,6 +4,10 @@
 ```/etc/sysctl.conf
 # Controls IP packet forwarding
 net.ipv4.ip_forward = 0
+
+# Disable Checking Packet's source IP
+net.ipv4.conf.all.rp_filter = 0
+net.ipv4.conf.default.rp_filter = 0
 ```
 
 ## reload
