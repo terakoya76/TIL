@@ -22,6 +22,33 @@ Connection Pool 一覧
 SHOW POOL_POOLS;
 ```
 
+## pcp cmd
+```bash
+# watchdog node 一覧
+$ pcp_watchdog_info -h localhost -U admin -w -v
+
+# postgres node 一覧
+$ pcp_health_check_stats -h localhost -U admin -w -v -n 0
+
+# postgres node の数
+$ pcp_node_count -h localhost -U admin -w -v
+
+# postgres node の情報を取得
+$ pcp_node_info -h localhost -U admin -w -v -n 0
+
+# postgres node を追加
+$ pcp_attach_node -h localhost -U admin -w -v -n 0
+
+# postgres node を削除
+$ pcp_detach_node -h localhost -U admin -w -v -n 0
+
+# postgres node をデータ再同期した上で復帰させる
+$ pcp_recovery_node -h localhost -U admin -w -v -n 0
+
+# postgres node を primary に promote する
+$ pcp_promote_node
+```
+
 ## Health Check
 https://www.pgpool.net/docs/42/ja/html/runtime-config-health-check.html
 
