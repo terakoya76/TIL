@@ -23,37 +23,50 @@ nginx.run:
 		-v $(shell pwd)/tcpproxy1.conf:/etc/nginx/nginx.conf:ro \
 		-p 12345:12345 \
 		--net mynet-a \
-		--ip 10.0.7.10 \
+		--ip 10.0.7.11 \
 		nginx;
 	sudo docker network connect mynet-c nginx-tcpproxy1
 	sudo docker run -d \
-		--name nginx-tcpproxy2 \
-		-v $(shell pwd)/tcpproxy2.conf:/etc/nginx/nginx.conf:ro \
-		-p 12346:12346 \
-		--net mynet-b \
-		--ip 10.0.8.10 \
-		nginx;
-	sudo docker network connect mynet-c nginx-tcpproxy2
-	sudo docker run -d \
 		--name nginx-reverseproxy1 \
-		-v $(shell pwd)/reverseproxy.conf:/etc/nginx/nginx.conf:ro \
+		-v $(shell pwd)/reverseproxy1.conf:/etc/nginx/nginx.conf:ro \
 		-p 8080:8080 \
 		--net mynet-c \
-		--ip 10.0.9.10 \
+		--ip 10.0.9.11 \
+		nginx;
+	sudo docker run -d \
+		--name nginx-reverseproxy2 \
+		-v $(shell pwd)/reverseproxy2.conf:/etc/nginx/nginx.conf:ro \
+		-p 8081:8081 \
+		--net mynet-c \
+		--ip 10.0.9.12 \
+		nginx;
+	sudo docker run -d \
+		--name nginx-reverseproxy3 \
+		-v $(shell pwd)/reverseproxy3.conf:/etc/nginx/nginx.conf:ro \
+		-p 8082:8082 \
+		--net mynet-c \
+		--ip 10.0.9.13 \
 		nginx;
 	sudo docker run -d \
 		--name nginx-app1 \
 		-v $(shell pwd)/app.conf:/etc/nginx/nginx.conf:ro \
 		--expose 9000 \
 		--net mynet-c \
-		--ip 10.0.9.11 \
+		--ip 10.0.9.21 \
 		nginx;
 	sudo docker run -d \
 		--name nginx-app2 \
 		-v $(shell pwd)/app.conf:/etc/nginx/nginx.conf:ro \
 		--expose 9000 \
 		--net mynet-c \
-		--ip 10.0.9.12 \
+		--ip 10.0.9.22 \
+		nginx
+	sudo docker run -d \
+		--name nginx-app3 \
+		-v $(shell pwd)/app.conf:/etc/nginx/nginx.conf:ro \
+		--expose 9000 \
+		--net mynet-c \
+		--ip 10.0.9.23 \
 		nginx
 
 nginx.check:
@@ -66,6 +79,13 @@ nginx.check:
 nginx.log:
 	sudo docker ps \
 		| grep nginx \
+		| awk '{print $$1}' \
+		| xargs -I{} sudo docker logs {}
+
+nginx.log.tcpproxy:
+	sudo docker ps \
+		| grep nginx \
+		| grep tcpproxy \
 		| awk '{print $$1}' \
 		| xargs -I{} sudo docker logs {}
 

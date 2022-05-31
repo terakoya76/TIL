@@ -1,7 +1,5 @@
 # Backup Recovery
-
 ## Backup
-
 * SQL dumps (or logical)
   * pgdump (logical)
 * Filesystem (or physical)
