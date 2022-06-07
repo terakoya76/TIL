@@ -45,4 +45,3 @@ cf. https://docs.docker.jp/engine/reference/logging/overview.html
   * ログが何回ロールオーバされたら破棄するかを指定します。
   * 例えば --log-opt max-file=100 のように指定します。
   * もし max-size が設定されなければ、 max-file は有効ではありません。
-

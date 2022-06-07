@@ -1,4 +1,4 @@
-# Bash Array
+# Array
 
 ## Basic
 ```bash
@@ -25,8 +25,11 @@ $ arr2=$(ls)
 $ for i in $(seq 0 6); do echo ${arr2[$i]}; done
 ansible.cfg group_vars inventory playbooks README.md roles setup.sh
 
-$ ls | read -a arr3
-$ for i in $(seq 0 6); do echo ${arr3[$i]}; done
+$ arr3=$(ls)
+$ for i in ${arr3[@]}; do echo $i; done
+
+$ ls | read -a arr4
+$ for i in $(seq 0 6); do echo ${arr4[$i]}; done
 ansible.cfg
 group_vars
 inventory
