@@ -1,6 +1,5 @@
 # Conntrack
 
-
 ```bash
 $ less /var/log/syslog
 Apr  4 20:42:33 x-x-x-x kernel: [15977317.778902] nf_conntrack: nf_conntrack: table full, dropping packet
