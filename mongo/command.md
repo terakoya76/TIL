@@ -16,6 +16,8 @@ $ sudo apt install -y mongodb-mongosh
 
 ### CLI
 https://www.mongodb.com/docs/mongodb-shell/reference/methods/
+
+connect
 ```bash
 $ sudo mongo --host 127.0.0.1 -u root -p root
 > show dbs
@@ -23,10 +25,36 @@ admin   0.000GB
 config  0.000GB
 hoge    0.000GB
 local   0.000GB
+```
 
-> show collections
+Database
+```bash
+# create
+> use <database_name>;
+
+# drop
+> db.dropDatabase();
+```
+
+Collection
+```bash
+# create
+> db.createCollection('<collection_name>');
+
+# drop
+> db.<collection_name>.drop();
+
+# list
+> show collections;
 documents
 
-> db.documents.find()
+# insert
+> db.documents.insertOne({title: "hoge"})
+
+# query
+> db.<collection_name>.find()
 { "_id" : ObjectId("62847e9a279bb4c4200ade18"), "created_at" : ISODate("2022-05-18T05:05:30.570Z"), "updated_at" : ISODate("2022-05-18T05:05:30.570Z"), "title" : "hoge", "content" : "hoge" }
+
+> db.documents.find({"_id": ObjectId("62847e9a279bb4c4200ade18")})
 ```
+

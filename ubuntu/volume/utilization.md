@@ -21,5 +21,5 @@ tmpfs            48M     0   48M   0% /run/user/1103
 ```
 
 ```bash
-
+$ du -h -d 1 /
 ```
