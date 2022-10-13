@@ -2,34 +2,53 @@
 
 ## Ubuntu
 
-Install warp-cli
+### Install Cloudflare Root Certs
+- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/install-cloudflare-cert#linux
+
+```bash
+$ sudo su -
+$ wget https://developers.cloudflare.com/cloudflare-one/static/documentation/connections/Cloudflare_CA.pem -O /usr/local/share/ca-certificates/Cloudflare_CA.crt
+$ update-ca-certificates
+$ ls /etc/ssl/certs/
+```
+
+
+### Install warp-cli
 - https://pkg.cloudflareclient.com/install
 
 ```bash
-$ curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-
-$ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ jammy main' | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
-
-$ sudo apt update
-
-$ sudo apt install -y cloudflare-warp
+$ sudo su -
+$ DIST=`lsb_release -a | tail -1 | awk '{ print $2 }'`
+$ curl https://pkg.cloudflareclient.com/pubkey.gpg | gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+$ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ ${DIST} main" > /etc/apt/sources.list.d/cloudflare-client.list
+$ apt update
+$ apt install -y cloudflare-warp
 ```
 
-Enroll Team
-- https://developers.cloudflare.com/warp-client/get-started/linux/
-- https://community.cloudflare.com/t/cloudflare-teams-warp-for-linux-enrollment/350857
+### Enroll Team by Service Token
+- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/warp-settings/#device-enrollment-permissions
+- https://developers.cloudflare.com/cloudflare-one/identity/service-tokens/
+- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/#install-warp-on-linux
+- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/parameters/
 
 ```bash
-$ warp-cli register
+$ cat <<EOF > mdm.xml
+<dict>
+  <key>organization</key>
+  <string>obniz</string>
+  <key>auth_client_id</key>
+  <string>f7907f8a00a568afd16aa323d35e5352.access</string>
+  <key>auth_client_secret</key>
+  <string>hogehoge</string>
+</dict>
+EOF
+$ sudo mv mdm.xml /var/lib/cloudflare-warp/mdm.xml
 
+$ warp-cli register
 $ warp-cli connect
 
 # verify warp=on
 $ curl https://www.cloudflare.com/cdn-cgi/trace/
-
-$ warp-cli enable-always-on
-
-$ warp-cli teams-enroll <team-name>
 
 # when teams-enroll doesnot work
 # cf. https://community.cloudflare.com/t/warp-cli-access-client-id-and-access-client-secret-no-longer-exist/384090/3
@@ -40,13 +59,3 @@ $ warp-cli teams-enroll <team-name>
 # 5. Run warp-cli teams-enroll-token "<paste that Request URL here>"
 ```
 
-Install Cloudflare Root Certs
-- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/install-cloudflare-cert#linux
-
-```bash
-$ wget https://developers.cloudflare.com/cloudflare-one/static/documentation/connections/Cloudflare_CA.pem -O Cloudflare_CA.pem
-$ sudo cp Cloudflare_CA.pem /usr/local/share/ca-certificates/Cloudflare_CA.crt
-$ sudo dpkg-reconfigure ca-certificates
-
-$ ls /etc/ssl/certs/
-```
