@@ -15,6 +15,12 @@ $ cat ip.txt \
 '
 ```
 
+## Pickup EC2 Tags from InstanceID
+```bash
+$ aws ec2 describe-instances --filter Name=instance-id,Values=${ID} \
+| jq -rc '.Reservations[].Instances[0].Tags[] | select(.Key == "Stage") | .Value'
+```
+
 ## Pick up tagged ASG
 ```bash
 $ KEY=<key-name>
