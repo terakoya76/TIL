@@ -1,4 +1,4 @@
-# ip alias
+# IP alias
 
 label をつけないと ifconfig で表示されない
 ```bash

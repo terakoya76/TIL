@@ -12,7 +12,6 @@ $ update-ca-certificates
 $ ls /etc/ssl/certs/
 ```
 
-
 ### Install warp-cli
 - https://pkg.cloudflareclient.com/install
 
@@ -44,8 +43,8 @@ $ cat <<EOF > mdm.xml
 EOF
 $ sudo mv mdm.xml /var/lib/cloudflare-warp/mdm.xml
 
-$ warp-cli register
-$ warp-cli connect
+$ warp-cli --accept-tos register
+$ warp-cli --accept-tos connect
 
 # verify warp=on
 $ curl https://www.cloudflare.com/cdn-cgi/trace/
