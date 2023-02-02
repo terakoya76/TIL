@@ -39,3 +39,23 @@ $ curl -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUN
   -H "Content-Type: application/json" \
   | jq -rc '.result[] | [.id, .name]'
 ```
+
+## Access Service Token List
+
+```bash
+$ curl -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/access/service_tokens" \
+  -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+  -H "X-Auth-Key: ${CLOUDFLARE_API_KEY}" \
+  -H "Content-Type: application/json" \
+  | jq -rc '.result[] | [.id, .name]'
+```
+
+## Access Group List
+
+```bash
+$ curl -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/access/groups" \
+  -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+  -H "X-Auth-Key: ${CLOUDFLARE_API_KEY}" \
+  -H "Content-Type: application/json" \
+  | jq -rc '.result[] | [.id, .name]'
+```

@@ -3,7 +3,8 @@ Ref: http://blog.livedoor.jp/sonots/archives/18193659.html
 
 system call の統計情報を取得
 ```bash
-$ strace -c ls
+# -c (--count option)
+$ strace -fc ls
 % time     seconds  usecs/call     calls    errors syscall
 ------ ----------- ----------- --------- --------- ----------------
   0.00    0.000000           0         7           read
@@ -31,7 +32,7 @@ $ strace -c ls
 
 統計情報から重そうな system call を絞り込んで trace
 ```bash
-$ strace -tt -s1024 -e trace=open ls
+$ strace -Ttt -f -s1024 -e trace=open ls
 19:50:13.745869 open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
 19:50:13.746039 open("/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
 19:50:13.746286 open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
@@ -46,7 +47,8 @@ $ strace -tt -s1024 -e trace=open ls
 
 process に attach する場合
 ```bash
-$ strace -tt -s1024 -p<PID> -f trace=open
+# -f (--fork option) がすべての process/thread を監視してくれる
+$ strace -Ttt -f -s1024 -p<PID> -e trace=open
 ```
 
 stdout から pipe したい場合
