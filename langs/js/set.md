@@ -1,4 +1,5 @@
 # set
+cf. https://zenn.dev/nananaoto/articles/3c49bcf18017b472b9ff
 
 Union
 ```javascript

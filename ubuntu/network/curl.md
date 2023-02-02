@@ -27,3 +27,8 @@ $ username=xx
 $ password=yy
 curl -I --basic -u ${username}:${password} ${host}
 ```
+
+## HTTP2
+```bash
+$ curl -I --http2 https://http2bin.org/get
+```
