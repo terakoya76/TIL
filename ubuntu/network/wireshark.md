@@ -1,4 +1,4 @@
-# Wireshark tips
+# Wireshark Tips
 
 ## Display Filter
 SYN Flag

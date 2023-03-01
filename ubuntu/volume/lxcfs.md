@@ -3,8 +3,8 @@
 ## Summary
 Ref: https://github.com/lxc/lxcfs
 
-LXCFS is a small FUSE filesystem written with the intention of making Linux containers feel more like a virtual machine.
-* It started as a side-project of LXC but is useable by any runtime.
+LXCFSは、Linuxコンテナをより仮想マシンに近い感覚で使えるようにすることを意図して書かれた、小さなFUSEファイルシステムです。
+* LXCのサイドプロジェクトとして始まったが、どのランタイムでも使用可能です。
 
 Ref: https://gihyo.jp/admin/serial/01/linux_containers/0033
 
@@ -12,21 +12,20 @@ LXCFSはホスト上で実行され、下記の機能を提供する
 * コンテナ向けの `cgroupfs` ツリーの提供
 * コンテナ向けの `/proc` 以下のファイルの提供
 
-cgroupfs の提供
-* bind mount された `cgroupfs` ツリーが，コンテナ内から参照された際には，そのコンテナに関係する `cgroup` のみを見せるように提供します。
-* これにより `systemd` などの `cgroupfs` ツリーが必要なソフトウェアに対して，実際に `cgroupfs` を mount した時のようなツリーを見せられます。
+cgroupfsの提供
+* bind mountされた `cgroupfs` ツリーが、コンテナ内から参照された際には、そのコンテナに関係する `cgroup` のみを見せるように提供します。
+* これにより `systemd` などの `cgroupfs` ツリーが必要なソフトウェアに対して、実際に `cgroupfs` をmountしたときのようなツリーを見せられます。
 
-procfs の提供
-* これまでも PID や mount 名前空間により，コンテナ向けの `/proc` が提供できました。
-  * しかし，リソースの状態を提供するようなファイルの中身はホストと同じ値が提供されていました。
-  * このため，メモリの消費状況を表示するためにリソース表示系のコマンドを使った場合，ホスト上で実行した際と同じ値がそのまま表示されていました。
-  * このため，コンテナ内で消費されているリソースをモニタリングする際は，ホスト上で `cgroup` が提供するファイルから値を読み取る必要がありました。
-* LXCFS を使うと，LXCFS がコンテナの `cgroup` から値を読み取り，コンテナ内で `/proc` 以下の対象となるファイルが読まれた場合に，コンテナごとの値を表示します。
-  * この機能により，コンテナ内でもホスト上と同じようにコマンドを実行して，コンテナ内のリソース状態をチェックできます。
+procfsの提供
+* これまでもPIDやmount名前空間により、コンテナ向けの `/proc` が提供できました。
+  * しかし、リソースの状態を提供するようなファイルの中身はホストと同じ値が提供されていました。
+  * この背景から、メモリの消費状況を表示するためにリソース表示系のコマンドを使った場合、ホスト上で実行した際と同じ値がそのまま表示されていました。
+  * そのため、コンテナ内で消費されているリソースをモニタリングする際は、ホスト上で `cgroup` が提供するファイルから値を読み取る必要がありました。
+* LXCFSを使うと、LXCFSがコンテナの `cgroup` から値を読み取り、コンテナ内で `/proc` 以下の対象となるファイルが読まれた場合に、コンテナごとの値を表示します。
+  * この機能により、コンテナ内でもホスト上と同じようにコマンドを実行して、コンテナ内のリソース状態をチェックできます。
 
 
-## LXCFS to provide container resource visibility on kubernetes
-Ref: https://www.alibabacloud.com/blog/kubernetes-demystified-using-lxcfs-to-improve-container-resource-visibility_594109
+## LXCFS to provide container resource visibility on Kubernetes
 
 install and deploy LXCFS on all cluster nodes
 ```yaml
@@ -79,10 +78,10 @@ spec:
           type: DirectoryOrCreate
 ```
 
-adminssion-webhook 等で pod に lxcfs 経由で procfs を mount する
+adminssion-Webhook等でpodにlxcfs経由でprocfsをmountする
 * https://github.com/denverdino/lxcfs-admission-webhook/blob/653e660654d6cd6035400fb4c0169ac20631c11c/lxcfs.go#L213-L252
 
-各 pod から procfs にアクセスできるようになる
+各podからprocfsへアクセスできるようになる
 ```bash
 $ kubectl get pod
 NAME                                                 READY   STATUS    RESTARTS   AGE
@@ -101,5 +100,5 @@ Swap:            0          0          0
 ```
 
 ## Usecase
-Debug another pod on kubernetes
+Debug another pod on Kubernetes
 * https://github.com/aylei/kubectl-debug/pull/83

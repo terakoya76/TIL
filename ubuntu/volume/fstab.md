@@ -1,6 +1,6 @@
 # fstab
-similar to `mount`
-mount device along w/ the `/etc/fstab` configuration
+Like `mount`.
+Mount device along with the `/etc/fstab` configuration.
 
 ```bash
 # mount cmd

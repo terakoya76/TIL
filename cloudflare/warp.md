@@ -3,7 +3,7 @@
 ## Ubuntu
 
 ### Install Cloudflare Root Certs
-- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/install-cloudflare-cert#linux
+* https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/user-side-certificates/install-cloudflare-cert/#linux
 
 ```bash
 $ sudo su -
@@ -13,7 +13,7 @@ $ ls /etc/ssl/certs/
 ```
 
 ### Install warp-cli
-- https://pkg.cloudflareclient.com/install
+* https://pkg.cloudflareclient.com/install
 
 ```bash
 $ sudo su -
@@ -25,10 +25,10 @@ $ apt install -y cloudflare-warp
 ```
 
 ### Enroll Team by Service Token
-- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/warp-settings/#device-enrollment-permissions
-- https://developers.cloudflare.com/cloudflare-one/identity/service-tokens/
-- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/#install-warp-on-linux
-- https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/parameters/
+* https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-settings/#device-enrollment-permissions
+* https://developers.cloudflare.com/cloudflare-one/identity/service-tokens/
+* https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/#install-warp-on-linux
+* https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/parameters/
 
 ```bash
 $ cat <<EOF > mdm.xml

@@ -1,5 +1,5 @@
 # embedded
-implement interface by embedded
+implementing interface by embedded
 ```go
 type UserInterface interface {
     Name() string

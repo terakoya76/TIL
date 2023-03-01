@@ -14,7 +14,7 @@ $ sudo cat /proc/cpuinfo | grep 'processor' | uniq
 
 ## GPU
 
-lspic から grep で探す
+lspicからgrepで探す
 ```bash
 $ lspci | grep -i nvidia
 ```

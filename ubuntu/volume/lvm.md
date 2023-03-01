@@ -1,6 +1,6 @@
 # lvm
 ## Mount FS from the attached volumes
-volume `xvdf, xvdg, xvdh` が attach されていることを確認
+volume `xvdf, xvdg, xvdh` がattachされていることを確認
 ```bash
 $ lsblk
 NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT

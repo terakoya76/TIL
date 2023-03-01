@@ -1,4 +1,4 @@
-# Tips for github api
+# Tips for GitHub api
 
 Pick up random member from teams
 ```bash

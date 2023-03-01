@@ -1,4 +1,4 @@
-# fluend conf example
+# Fluentd conf example
 ## Collect from Docker socket
 ```xml
 @include "#{ENV['FLUENTD_SYSTEMD_CONF'] || 'systemd'}.conf"
@@ -18,7 +18,7 @@
 </source>
 ```
 
-## Concat
+## `Concat`
 Ref: https://github.com/fluent-plugins-nursery/fluent-plugin-concat
 
 ```xml
@@ -41,7 +41,7 @@ Ref: https://github.com/fluent-plugins-nursery/fluent-plugin-concat
 </label>
 ```
 
-## Parser
+## `Parser`
 Ref: https://docs.fluentd.org/parser
 
 ```xml
@@ -64,10 +64,10 @@ Ref: https://docs.fluentd.org/parser
 </label>
 ```
 
-## Record Transformer
+## `Record Transformer`
 Ref: https://docs.fluentd.org/filter/record_transformer
 
-embed s3 dest info
+embed `S3 Destination` info
 ```xml
 <filter kubernetes.**>
   @type record_transformer
@@ -79,7 +79,7 @@ embed s3 dest info
 </filter>
 ```
 
-## Rewrite Tag
+## `Rewrite Tag Filter`
 Ref: https://github.com/fluent/fluent-plugin-rewrite-tag-filter
 
 ```xml
@@ -97,7 +97,7 @@ Ref: https://github.com/fluent/fluent-plugin-rewrite-tag-filter
 </match>
 ```
 
-## Copy and Relabel
+## `Copy` and `Relabel`
 Ref:
 * https://docs.fluentd.org/output/copy
 * https://docs.fluentd.org/output/relabel
@@ -117,7 +117,7 @@ Ref:
 </match>
 ```
 
-## S3 Out
+## `S3 Output`
 Ref: https://docs.fluentd.org/output/s3
 
 ```xml
@@ -203,12 +203,12 @@ Ref: https://docs.fluentd.org/output/s3
 </label>
 ```
 
-## fluentd-kubernetes-daemonset
+## `fluentd-kubernetes-daemonset`
 Ref: https://github.com/fluent/fluentd-kubernetes-daemonset
 
 tail source
-* path は wildcard
-* pos_file 固定
+* パスはwildcard
+* pos_file固定
 ```xml
 <source>
   @type tail
@@ -222,8 +222,8 @@ tail source
 </source>
 ```
 
-path
-* `/var/lib/docker/container` に docker が log を吐く。
-* kubelet は `/var/lib/docker/container` から `/var/log/containers` 下へ symlink を貼る
-* fluentd が wildcard path ですべての docker log を監視対象に入れられる
+パス
+* `/var/lib/docker/container` にdockerがlogを吐く
+* kubeletは `/var/lib/docker/container` から `/var/log/containers` 下へsymlinkを貼る
+* Fluentdがwildcardパスですべてのdocker logを監視対象に入れられる
 

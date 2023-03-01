@@ -44,7 +44,7 @@ From 10.10.10.10 icmp_seq=2 Destination Host Unreachable
 From 10.10.10.10 icmp_seq=3 Destination Host Unreachable
 ```
 
-veth は異なる ns 間でないと疎通できない。
+vethは異なるns間でないと疎通できない。
 ```bash
 # add ns
 $ sudo ip netns add netns01

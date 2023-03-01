@@ -1,6 +1,6 @@
 # Swap Usage
 
-Swapを使っているプロセスと使用量を使ってる順に表示
+Swapを使っているプロセスと使用量を使っている順に表示
 ```bash
 $ grep VmSwap /proc/*/status | sort -k 2 -nr
 ```

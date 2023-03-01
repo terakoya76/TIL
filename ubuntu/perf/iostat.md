@@ -16,7 +16,7 @@ sdb              0.07      0.66     0.00   0.00    0.21     9.88    0.00      0.
 ```
 
 ### Option
-* `-d` disk utilization only
+* `-d` disk utilization
 * `-x` extended column
 * `-z` skipping devices w/ zero metrics
 

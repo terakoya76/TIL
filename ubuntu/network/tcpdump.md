@@ -1,4 +1,4 @@
-# tcpdump
+# `tcpdump`
 
 Ref: https://memo.yuuk.io/entry/2018/01/25/221111
 
@@ -19,5 +19,5 @@ ICMP over all interfaces
 $ tcpdump -eni any icmp
 ```
 
-## tcpdump and iptables
+## `tcpdump` and `iptables`
 https://hirose31.hatenablog.jp/entry/20090401/1238585753

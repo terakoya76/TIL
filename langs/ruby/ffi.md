@@ -5,10 +5,10 @@ Ref: https://github.com/ffi/ffi
 Ref: https://github.com/ffi/ffi/wiki/Types
 
 ## String and Memory Allocation
-ruby の string pointer を C 側で mutate する場合、C 側の処理が完了するまで ruby string は生存するようにケアする必要あり
+Rubyのstring pointerをC側でmutateする場合、C側の処理が完了するまでRuby stringは生存するようにケアする必要あり
 Ref: https://github.com/ffi/ffi/wiki/Core-Concepts#memory-management
 
-string を返り値にしたい場合、workaround が必要
+stringを戻り値にしたい場合、workaroundが必要
 ```ruby
 module AugeasLib
   extend FFI::Library
@@ -26,13 +26,13 @@ end
 cf. https://github.com/ffi/ffi/wiki/Examples#single-string
 
 ## ffi で bridge 実装
-Ref: http://kazegusuri.hateblo.jp/entry/2014/03/02/192729
+Ref: https://kazegusuri.hateblo.jp/entry/2014/03/02/192729
 
 requirements
 * The libffi library and development headers - this is commonly in the libffi-dev or libffi-devel packages
 
-Simple な実装
-* memory 管理を ruby から C の FFI を叩くことで client 側から行う
+Simpleな実装
+* memory管理をRubyからCのFFIをたたくことでclient側から行う
 ```ruby
 module FooLib
   extend FFI::Library
@@ -52,10 +52,10 @@ module FooLib
 end
 ```
 
-Memory 管理 free な実装
+Memory管理freeな実装
 * ManagedStruct
-  * Struct に hook を掛けられる
-  * `self.releaase` は GC 時に呼び出される
+  * Structにhookを掛けられる
+  * `self.releaase` はGC時に呼び出される
 ```ruby
 class ManagedFoo < FFI::ManagedStruct
    layout(
@@ -70,7 +70,7 @@ class ManagedFoo < FFI::ManagedStruct
 ```
 
 AutoPointer
-* Pointer に hook を掛けられる
+* Pointerにhookを掛けられる
   * `initialize`, `self.release`
 ```ruby
 class FooPointer < FFI::AutoPointer

@@ -1,5 +1,5 @@
 # Tips for woking w/ AWS EC2
-## Pickup EC2 InstanceID from private IP
+## Pickup EC2 Instance ID from private IP
 ```bash
 $ aws ec2 describe-instances --filter Name=network-interface.addresses.private-ip-address,Values=${IP} \
 | jq -rc '.Reservations[].Instances[] | [.InstanceId, .PrivateIpAddress]'
@@ -15,7 +15,7 @@ $ cat ip.txt \
 '
 ```
 
-## Pickup EC2 Tags from InstanceID
+## Pickup EC2 Tags from Instance ID
 ```bash
 $ aws ec2 describe-instances --filter Name=instance-id,Values=${ID} \
 | jq -rc '.Reservations[].Instances[0].Tags[] | select(.Key == "Stage") | .Value'

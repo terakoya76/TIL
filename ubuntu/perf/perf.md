@@ -18,14 +18,14 @@ $ sudo perf record -F 99 -C 0 -g dwarf -- sleep 10
 $ sudo perf report --stdio
 ```
 
-* -a: 全ての CPU のデータを採取します（デフォルトの動作）。
-* -C/--cpu (cpu number): 採取するデータを、指定した CPU のデータに限定します。
+* -a: すべてのCPUのデータを採取します（デフォルトの動作）。
+* -C/--cpu (cpu number): 採取するデータを、指定したCPUのデータに限定します。
 * -g/--call-graph: バックトレース情報も採取します。
 * -o (file name): 出力ファイル名を指定します（デフォルト：perf.data）。
 
 
 ## Supported Arch
-`perf mem` は Intel CPU のみ対応してる模様
+`perf mem` はIntel CPUのみ対応している模様
 https://community.amd.com/t5/server-gurus-discussions/issues-with-perf-mem-record/m-p/95270
 
 ## Allow non-root user perf usage

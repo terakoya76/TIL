@@ -1,12 +1,12 @@
 # Systemd Order Control
 ## Summary
-mackerel-agent より先に監視対象の unit が shutdown して誤報アラートが飛んでしまうのを防ぐ
-つまり監視対象が立ち上がってから mackerel-agent が立ち上がるようにすれば、mackerel-agent が shutdown してから監視対象が shutdown するようになる。
+mackerel-agentより先に監視対象のunitがshutdownして誤報アラートが飛んでしまうのを防ぐ
+つまり監視対象が立ち上がってからmackerel-agentが立ち上がるようにすれば、mackerel-agentがshutdownしてから監視対象がshutdownするようになる。
 
 ## How to
 
 ### Prerequisite
-mackerel-agent.service は multi-user.target により起動シーケンスに入る
+mackerel-agent.serviceはmulti-user.targetにより起動シーケンスに入る
 
 ```bash
 $ cat /etc/systemd/system/multi-user.target.wants/mackerel-agent.service
@@ -30,7 +30,7 @@ LimitNPROC=65536
 WantedBy=multi-user.target
 ```
 
-multi-user.target.wants/* は symlink になっている
+multi-user.target.wants/* はsymlinkになっている
 
 ```bash
 $ ll /etc/systemd/system/multi-user.target.wants/
@@ -45,8 +45,8 @@ lrwxrwxrwx  1 root root   33 Dec  2 14:56 nginx.service -> /etc/systemd/system/n
 ```
 
 ### アプローチ
-- mackerel-agent.service に After=nginx.service
-- nginx.service に Before=mackerel-agent.service
+- mackerel-agent.serviceにAfter=nginx.service
+- nginx.serviceにBefore=mackerel-agent.service
 
 ### 後者の場合
 
