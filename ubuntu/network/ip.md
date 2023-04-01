@@ -1,5 +1,6 @@
 # ip
-## routing table
+
+## ルーティングテーブル
 ```bash
 # all table entry
 $ ip route show table all

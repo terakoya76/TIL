@@ -6,7 +6,7 @@ $ apt update && apt install -y inotify-tools
 ```
 
 ## Usage
-inode に変更入る場合（recreate）、`-e modify` だと event を拾えない。
+inodeに変更入る場合（recreate）、`-e modify` だとeventを拾えない。
 `-e attrib` を使うと拾える。
 
 ```bash
@@ -19,7 +19,7 @@ Watches established.
 /etc/my-metadata/metadata ATTRIB
 ```
 
-event 検知で任意の処理を実行する
+event検知で任意の処理を実行する
 ```bash
 while inotifywait -e attrib -q /etc/my-metadata/metadata; do
   echo $(cat /etc/my-metadata/metadata)

@@ -1,7 +1,7 @@
 # CGO
 Ref: https://golang.org/cmd/cgo/
 
-cgo directive で FLAG 指定
+cgo directiveでFLAG指定
 ```go
 // #cgo CFLAGS: -DPNG_DEBUG=1
 // #cgo amd64 386 CFLAGS: -DX86=1
@@ -13,8 +13,8 @@ import "C"
 ## GC between C and GO
 Ref: https://github.com/shazow/gohttplib/blob/master/ptrproxy.go
 
-go で作った object への pointer を C に渡した場合、go 側で GC が走ると SEGV する。
-そのため上記のように、go 側で resource id と pointer の map を作り、C には resource id を渡すといった工夫が必要
+goで作ったobjectへのpointerをCに渡した場合、go側でGCが走るとSEGVする。
+そのため上記のように、go側でresource idとpointerのmapを作り、Cにはresource idを渡すといった工夫が必要
 
 ## C reference to GO
 Ref: https://golang.org/cmd/cgo/#hdr-C_references_to_Go
@@ -53,26 +53,26 @@ Ref: https://qiita.com/yugui/items/e71d3d0b3d654a110188
 
 1. コード生成
   * `go tool cgo import_example.go`
-  * `xx.go` ファイル中、cgo を利用しているものだけを cgo コマンドに渡す
-2. Cコードのコンパイル（OBJS を生成）
+  * `xx.go` ファイル中、cgoを利用しているものだけをcgoコマンドに渡す
+2. Cコードのコンパイル（OBJSを生成）
   * `gcc -c SOURCES`
-3. Object Files のリンク
+3. Object Filesのリンク
   * `gcc -o _cgo_.o OBJS`
 4. インポート宣言の生成
   * `go tool cgo -dynimport ....`
-  * GO のリンカーに 3. で生成した link 情報（`_cgo_.o`）を渡す
+  * GOのリンカーに3. で生成したlink情報（`_cgo_.o`）を渡す
 5. Goコードのコンパイル
   * `go tool compile -o example1.a -pack GO_FILES`
-  * 1,4 で生成した GO Files および cgo を利用していないものをコンパイル
+  * 1,4で生成したGO Filesおよびcgoを利用していないものをコンパイル
 6. Cコードの再リンク
   * `gcc -o _all.o OBJS`
-  * 3. との違いは依存ライブラリは link しないこと
+  * 3. との違いは、依存ライブラリをlinkしないこと
 7. Cオブジェクトをアーカイブに追加
   * `go tool pack r example1.a _all.o`
-  * 6. で生成した link 情報を 5. で生成したアーカイブに追加
+  * 6. のlink情報を、5. で生成したアーカイブに追加
 8. アーカイブ内のオブジェクトをリンク
   * `go tool link -o example example1.a`
-  * アーカイブ内の Object や依存ライブラリの Object をリンクする
+  * アーカイブ内のObjectや依存ライブラリのObjectをリンクする
 
 ## C library を GO にリンク（GO reference to C）
 Ref: https://qiita.com/yugui/items/cc490d080e0297251090

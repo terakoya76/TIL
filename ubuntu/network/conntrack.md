@@ -27,7 +27,7 @@ nf_conntrack_events                 nf_conntrack_sctp_timeout_cookie_wait    nf_
 
 ```
 
-nf_conntrack_max 変更
+nf_conntrack_max変更
 ```bash
 $ sudo vim /etc/sysctl.conf
 $ sudo sysctl -p

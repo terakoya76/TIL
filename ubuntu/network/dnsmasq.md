@@ -2,7 +2,7 @@
 
 ## Migrate dnsmasq from systemd-resolved
 
-systemd-resolvedを止める
+systemd-resolvedをやめる
 ```bash
 $ sudo vim /etc/systemd/resolved.conf
 
@@ -12,7 +12,7 @@ DNSStubListener=no
 $ sudo systemctl restart systemd-resolved
 ```
 
-DHCPで降ってくるDNSサーバの情報を反映させるため NetworkManagerの設定をする
+DHCPで降ってくるDNSサーバの情報を反映させるためNetworkManagerの設定をする
 ```bash
 $ sudo vim /etc/NetworkManager/NetworkManager.conf
 

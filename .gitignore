@@ -1,2 +1,5 @@
 .vagrant
 *.log
+
+# for npm
+node_modules/

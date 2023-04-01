@@ -3,16 +3,16 @@
 Ref:
 * http://blog.livedoor.jp/sonots/archives/44690980.html?ref=popular_article&id=5419188-3748581
 
-fluentd documentation
+Fluentd documentation
 * https://docs.fluentd.org/output/forward
 * https://docs.fluentd.org/plugin-helper-overview/api-plugin-helper-compat_parameters
 * https://docs.fluentd.org/configuration/buffer-section
 
 
 前提
-* ulimit の調整
+* ulimitの調整
 
-## 0.12 compat
+## `0.12 compat`
 ```xml
 <source>
   @type tail

@@ -1,7 +1,7 @@
 # strace
 Ref: http://blog.livedoor.jp/sonots/archives/18193659.html
 
-system call の統計情報を取得
+system callの統計情報を取得
 ```bash
 # -c (--count option)
 $ strace -fc ls
@@ -30,7 +30,7 @@ $ strace -fc ls
 100.00    0.000000                    92         9 total
 ```
 
-統計情報から重そうな system call を絞り込んで trace
+統計情報から重そうなsystem callを絞り込んでtrace
 ```bash
 $ strace -Ttt -f -s1024 -e trace=open ls
 19:50:13.745869 open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
@@ -45,14 +45,14 @@ $ strace -Ttt -f -s1024 -e trace=open ls
 19:50:13.749142 +++ exited with 0 +++
 ```
 
-process に attach する場合
+processにattachする場合
 ```bash
 # -f (--fork option) がすべての process/thread を監視してくれる
 $ strace -Ttt -f -s1024 -p<PID> -e trace=open
 ```
 
-stdout から pipe したい場合
-strace の出力は stderr に吐かれるので redirect が必要
+stdoutからpipeしたい場合
+straceの出力はstderrに吐かれるのでredirectが必要
 ```bash
 $ strace mysql 2>&1  | grep 'open' | grep '.cnf'
 ```

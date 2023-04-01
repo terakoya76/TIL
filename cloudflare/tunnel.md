@@ -1,8 +1,8 @@
 # Cloudflare Tunnel
 
 
-## Install cloudflared
-- https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/
+## Install `cloudflared`
+- https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/private-net/
 
 ```bash
 $ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
@@ -26,7 +26,7 @@ $ cloudflared tunnel run grafana
 ```
 
 ## Automation
-Once cloudflare tunnel is created, e.g. via terraform, you can run cloudflared with tonnel_token
+Once creating Cloudflare tunnel, e.g. via terraform, you can run `cloudflared` with `tonnel_token`
 
 ```bash
 cf_version="2022.10.3"

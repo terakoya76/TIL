@@ -1,0 +1,31 @@
+name: text-lint
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+      - '**/**.md'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  text-lint:
+    name: Text Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: npm ci
+      - uses: reviewdog/action-setup@v1
+      - name: run-reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./node_modules/textlint/bin/textlint.js -f checkstyle **.md \
+            | reviewdog -f=checkstyle -name="textlint" -diff="git diff ${{ github.event.pull_request.base.ref }}" -reporter=github-pr-review
+          ./node_modules/textlint/bin/textlint.js -f checkstyle **/** \
+            | reviewdog -f=checkstyle -name="textlint" -diff="git diff ${{ github.event.pull_request.base.ref }}" -reporter=github-pr-review

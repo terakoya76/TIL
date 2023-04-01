@@ -1,4 +1,4 @@
-# Find Java Path
+# Find Java Binaryパス
 
 ```bash
 $ update-alternatives --list java

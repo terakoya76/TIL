@@ -1,4 +1,4 @@
-# DNS Cache
+# DNS キャッシュ
 
 chrome
 ```

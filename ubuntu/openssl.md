@@ -17,7 +17,7 @@ check Issuer
 openssl x509 -text -noout -in certs/server.pem | grep -i issuer:
 ```
 
-is Root Cert?
+Ensure whether Root Cert or not.
 ```bash
 # CA:TRUE = Root Cert
 # CA:FALSE = Server Cert
