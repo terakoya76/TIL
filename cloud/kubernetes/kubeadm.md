@@ -9,19 +9,19 @@
 * 素材
 * usb to micro usb 0.3m * 3
   * https://www.amazon.co.jp/gp/product/B074VM7J5Z
-* usb バッテリ
+* usbバッテリ
   * https://www.amazon.co.jp/gp/product/B00Z8Z7WEE
 * 無線親機
   * https://www.amazon.co.jp/gp/product/B07R2CKQXC
 * 積層ケース
   * https://www.amazon.co.jp/gp/product/B01F8AHNBA
-* SD カード 64gb * 3
+* SDカード64gb * 3
   * https://www.amazon.co.jp/gp/product/B06XSWLYLF
-* LAN ケーブル 0.3m * 3
+* LANケーブル0.3m * 3
   * https://www.amazon.co.jp/gp/product/B00FZTNQ16
-* LAN ケーブル 0.15m
+* LANケーブル0.15m
   * https://www.amazon.co.jp/gp/product/B00FZTNJQI
-* スイッチングハブ 5ポート
+* スイッチングハブ5ポート
   * https://www.amazon.co.jp/gp/product/B00D5Q7V1M
 
 ### 論理構築
@@ -29,7 +29,7 @@
   * https://qiita.com/shirot61/items/2321b70cd9c93f8f5cf0
   * https://kuromt.hatenablog.com/entry/2019/01/03/233347
 * Raspberry Pi Imager
-  * https://www.raspberrypi.org/downloads/
+  * https://www.raspberrypi.com/software/
 
 ## SSH
 cf. https://qiita.com/xshell/items/af4e2ef8d804cd29e38e
@@ -130,7 +130,7 @@ sudo sed -i "s/SystemdCgroup = false/SystemdCgroup = true/g" /etc/containerd/con
 sudo systemctl restart containerd
 ```
 
-(Deprecated) docker cgroup driver を kubelet 同様 systemd に変更する（元は cgroupfs）
+(Deprecated) docker cgroup driverをkubelet同様systemdに変更する（元はcgroupfs）
 * Ref: https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 
 ```bash
@@ -156,12 +156,11 @@ Cgroup Driver: systemd
 ```
 
 ### Disable Swap
-Kubernetes1.8 から Swap が有効になっていると kubelet が起動しない
+Kubernetes1.8からSwapが有効になっているとkubeletが起動しない
 ```bash
 free -h
 swapon -s
 ```
-
 
 ### Install kube-xxx
 ```bash
@@ -199,8 +198,10 @@ sudo systemctl restart kubelet
 ```
 
 ### Setup Gateway
-CentOS とかで問題あるらしい
-* `error execution phase preflight: [preflight] Some fatal errors occurred: [ERROR FileContent--proc-sys-net-ipv6-conf-default-forwarding]: /proc/sys/net/ipv6/conf/default/forwarding contents are not set to 1`
+CentOSとかで問題あるらしい
+```bash
+error execution phase preflight: [preflight] Some fatal errors occurred: [ERROR FileContent--proc-sys-net-ipv6-conf-default-forwarding]: /proc/sys/net/ipv6/conf/default/forwarding contents are not set to 1
+```
 
 ```bash
 echo 1 > /proc/sys/net/ipv6/conf/default/forwarding
@@ -220,7 +221,7 @@ vi /etc/sysctl.conf
 * pod `10.244.0.0/16`
   * for flannel
 
-### Create First Master Node
+### Create First `MasterNode`
 ```bash
 # allow ingress from local network for etcd
 # etcd を独立して構築すれば、回避できるかも
@@ -281,7 +282,7 @@ sudo kubeadm join ${LOAD_BALANCER_DNS}:${LOAD_BALANCER_PORT} \
   --discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxx
 ```
 
-When your cert is expired like below
+When you have an expired cert like below
 ```
 One or more conditions for hosting a new control plane instance is not satisfied.
 
@@ -302,7 +303,7 @@ sudo kubeadm join ${LOAD_BALANCER_DNS}:${LOAD_BALANCER_PORT} \
   --certificate-key yyyyyyyyyyyyyyyy
 ```
 
-### Install CNI to have First Master Node getting Ready
+### Install CNI to have First `MasterNode` getting Ready
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
 
 When `ps for containerd`
@@ -335,7 +336,7 @@ helm install cilium cilium/cilium --version 1.9.1 --namespace kube-system --set 
 ```
 
 #### calico
-cf. https://docs.tigera.io/calico/3.25/getting-started/kubernetes/quickstart
+cf. https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
 ```bash
 # allow ingress from Calico node via default svc
 sudo ufw allow from 192.168.11.0/24 to any port 6443 proto tcp
@@ -367,7 +368,7 @@ kubectl create ns tigera-operator
 helm install calico projectcalico/tigera-operator -f values.yaml --namespace tigera-operator
 ```
 
-##### CASE1: calico-node が何故か running にならない
+##### CASE1: calico-node がなぜか running にならない
 ```bash
 ubuntu@node-0-0:~$ kubectl get po -A
 NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE
@@ -408,9 +409,9 @@ cf. https://kubernetes.io/blog/2022/11/18/upcoming-changes-in-kubernetes-1-26/#c
 
 > Kubernetes v1.26 は CRI をサポートしませんv1alpha2。その削除により、コンテナー ランタイムが CRI をサポートしていない場合、kubelet はノードを登録しませんv1。これは、containerd のマイナー バージョン 1.5 以前は Kubernetes 1.26 ではサポートされないことを意味します。containerd を使用する場合、そのノードを Kubernetes v1.26 にアップグレードする前に、 containerd バージョン 1.6.0 以降にアップグレードする必要があります。
 
-containerd 1.6 移行にするか、Kubernetes version を 1.25 以前に変更する
+containerd 1.6移行にするか、Kubernetes versionを1.25以前に変更する
 
-##### CASE3: tailscale base の cluster で WorkerNode calico-node が何故か running にならない
+##### CASE3: tailscale base の cluster で WorkerNode calico-node がなぜか running にならない
 ```bash
 $ kubectl get po -A -o wide -w | grep calico
 calico-apiserver   calico-apiserver-5f9d54c45c-7ml8g          1/1     Running    0              10h     192.168.128.5     raspberrypi-1    <none>           <none>
@@ -569,7 +570,7 @@ helm install flannel --set podCidr="10.244.0.0/16" https://github.com/flannel-io
 ```
 
 ## Cleanup
-for worker node
+for `WorkerNode`
 ```bash
 kubectl drain node-0-2 --delete-local-data --force --ignore-daemonsets
 kubectl delete node node-0-2
@@ -580,7 +581,7 @@ iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 rm -r /etc/cni/net.d
 ```
 
-for master node
+for `MasterNode`
 ```bash
 sudo su -
 kubeadm reset
