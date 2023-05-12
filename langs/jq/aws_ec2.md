@@ -45,7 +45,7 @@ $ aws autoscaling describe-auto-scaling-groups | jq --arg NAME ${NAME} '
 ```bash
 $ KEY=<key-name>
 $ VALUE=<value-name>
-$ aws ec2 describe-instances --filter Name=tag:${KEY},Values=${VALUE} \
+$ aws ec2 describe-instances --no-cli-auto-prompt --filter Name=tag:${KEY},Values=${VALUE} \
 | jq -rc .Reservations[].Instances[]
 
 # extrace summary
