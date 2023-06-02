@@ -1,5 +1,6 @@
 # Setup bluetooth on standalone Ubuntu
 
+## Setup
 ref. https://askubuntu.com/questions/1304427/install-bluetooth-driver-in-ubuntu-20-04
 
 Download Driver
@@ -65,3 +66,7 @@ sudo vim /etc/bluetooth/main.conf
 [General]
 Enable=Control,Gateway,Headset,Media,Sink,Socket,Source
 ```
+
+## Manual Pairng
+ref: https://mistymagich.wordpress.com/2021/09/07/windows-10-%E3%81%A8-xubuntu-20-04-%E3%81%AE%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%96%E3%83%BC%E3%83%88%E7%92%B0%E5%A2%83%E3%81%A7-happy-hacking-keyboard-professional-hybrid-type-s-%E3%82%92/
+
