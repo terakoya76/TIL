@@ -53,6 +53,13 @@ sudo systemctl restart systemd-resolved.service
 nslookup www.google.com
 ```
 
+### (Optional) Change Hostname
+```bash
+# change hostname
+sudo sed -i "s/^preserve_hostname: false/preserve_hostname: true/g" /etc/cloud/cloud.cfg
+sudo hostnamectl set-hostname raspberrypi-1
+```
+
 ### (Optional) server は固定 ip に
 ```bash
 ip a
@@ -164,33 +171,25 @@ swapon -s
 
 ### Install kube-xxx
 ```bash
-sudo su -
+sudo apt update
+sudo apt install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
-apt update && apt install -y apt-transport-https curl
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-
-cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
-
-apt update
-apt install -y kubelet kubeadm kubectl
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt update
+sudo apt install -y kubelet kubeadm kubectl
 
 # 1.26 は互換性問題があるので避ける
 # cf. https://stackoverflow.com/questions/75131916/failed-to-validate-kubelet-flags-the-container-runtime-endpoint-address-was-not
-kversion="1.25.*"
-apt update
-apt install -y kubelet=$kversion kubeadm=$kversion kubectl=$kversion
-apt-mark hold kubelet kubeadm kubectl
+kversion="1.27.*"
+sudo apt update
+sudo apt install -y kubelet=${kversion} kubeadm=${kversion} kubectl=${kversion}
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 ## kubeadm
 ### Adjust Node IP
 ```bash
-# change hostname
-sudo sed -i "s/^preserve_hostname: false/preserve_hostname: true/g" /etc/cloud/cloud.cfg
-sudo hostnamectl set-hostname raspberrypi-1
-
 # use private ip as node
 echo "KUBELET_EXTRA_ARGS=--node-ip=$(tailscale ip -4)" | sudo tee /etc/default/kubelet
 sudo systemctl daemon-reload
@@ -231,7 +230,7 @@ sudo ufw allow from 192.168.11.0/24 to any port 2380 proto tcp
 sudo su -
 mkdir -p /etc/kubernetes/kubeadm
 
-LOAD_BALANCER_DNS=k8s-control-plane.chozo.app
+LOAD_BALANCER_DNS=myk8s.terakoya76.dev
 LOAD_BALANCER_PORT=6443
 CONFIG_PATH=/etc/kubernetes/kubeadm/kubeadm-config.yaml
 
@@ -250,10 +249,15 @@ kubernetesVersion: stable
 controlPlaneEndpoint: "${LOAD_BALANCER_DNS}:${LOAD_BALANCER_PORT}"
 networking:
   # for calico, prevent from local network overlap
-  podSubnet: 192.168.128.0/24
+  # podSubnet: 192.168.128.0/24
+  podSubnet: 192.168.0.0/16
 apiServer:
   certSANs:
     - $(tailscale ip -4)
+etcd:
+  local:
+    serverCertSANs:
+      - $(tailscale ip -4)
 EOF
 
 kubeadm init --config=${CONFIG_PATH} --upload-certs
@@ -312,10 +316,8 @@ When `ps for containerd`
 sudo crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock ps
 ```
 
-
 #### cilium
 cf. https://docs.cilium.io/en/latest/gettingstarted/k8s-install-default/
-
 
 CLI
 ```bash
@@ -355,8 +357,9 @@ cat > values.yaml <<EOF
 installation:
   calicoNetwork:
     ipPools:
-    - cidr: 192.168.128.0/24
-      encapsulation: IPIPCrossSubnet
+    # - cidr: 192.168.128.0/24
+    - cidr: 192.168.0.0/16
+      # encapsulation: IPIPCrossSubnet
       natOutgoing: Enabled
       nodeSelector: all()
     nodeAddressAutodetectionV4:

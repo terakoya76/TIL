@@ -4,17 +4,25 @@
 
 via connection
 ```bash
-openssl s_client -connect <domain>:443 -showcerts
+openssl s_client -connect <domain>:443 -showcerts < /dev/null 2> /dev/null
 ```
 
 via file
 ```bash
 openssl x509 -text -noout -in ./server.pem
+
+# including ca bundle
+openssl storeutl -text -noout -certs ./server.pem | grep "Not After"
 ```
 
 check Issuer
 ```bash
 openssl x509 -text -noout -in certs/server.pem | grep -i issuer:
+```
+
+check ExpireDate
+```bash
+openssl x509 -text -noout -in certs/server.pem | grep -i notafter:
 ```
 
 Ensure whether Root Cert or not.

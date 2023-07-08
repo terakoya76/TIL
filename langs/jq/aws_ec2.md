@@ -72,3 +72,21 @@ $ aws autoscaling describe-auto-scaling-groups | jq -cr --arg NAME ${NAME} '
 '
 ```
 
+## Pickup Newly Launched Instance IDs
+```bash
+name=hoge
+
+old_instance_ids=$(aws --no-cli-auto-prompt \
+  autoscaling describe-auto-scaling-groups \
+  --auto-scaling-group-name ${name} \
+  | jq -c [.AutoScalingGroups[0].Instances[].InstanceId])
+
+new_instance_ids=$(aws --no-cli-auto-prompt \
+  autoscaling describe-auto-scaling-groups \
+  --auto-scaling-group-name ${name} \
+  | jq -c [.AutoScalingGroups[0].Instances[].InstanceId])
+
+merged="{\"old_instance_ids\":${old_instance_ids}, \"new_instance_ids\":${new_instance_ids}}"
+
+echo ${merged} | jq -r '.new_instance_ids - .old_instance_ids | .[]'
+```
