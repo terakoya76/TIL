@@ -8,10 +8,11 @@ filter       = 'metric.type="logging.googleapis.com/billing/bytes_ingested"'
 view         = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::FULL
 
 now                 = Time.now
-duration            = 60*60*24*1
+today               = Time.new(now.year, now.month, now.day-1, 0, 0, 0, 0)
+duration            = 60*60*24*7
 interval            = Google::Cloud::Monitoring::V3::TimeInterval.new
-interval.end_time   = Google::Protobuf::Timestamp.new(seconds: now.to_i, nanos: now.nsec)
-interval.start_time = Google::Protobuf::Timestamp.new(seconds: now.to_i - duration, nanos: now.nsec)
+interval.end_time   = Google::Protobuf::Timestamp.new(seconds: today.to_i, nanos: today.nsec)
+interval.start_time = Google::Protobuf::Timestamp.new(seconds: today.to_i - duration, nanos: today.nsec)
 
 aggregation = Google::Cloud::Monitoring::V3::Aggregation.new(
   alignment_period:   { seconds: 60*5 },
@@ -38,7 +39,7 @@ data.each do |ts|
 end
 
 result.reduce([]) {|acc, (k, v)|
-  acc << [project_id, k, v.to_f/1000/1000]
+  acc << [project_id, k, v.to_f/1000/1000/1000]
 }.each {|l|
   p l.join(",")
 }
