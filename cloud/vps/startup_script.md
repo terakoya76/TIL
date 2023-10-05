@@ -6,7 +6,7 @@ set -ue
 user=hoge
 ssh_port=22
 
-cloudflared_version=2023.2.1
+cloudflared_version=2023.8.2
 cloudflared_tunnel_token=xxxxx
 cloudflare_access_ca_cert_public_key=xxxxx
 
@@ -31,6 +31,12 @@ cloudflare_access_ca_cert_public_key_file="/etc/ssh/ca.pub"
 
 echo "${cloudflare_access_ca_cert_public_key}" > ${cloudflare_access_ca_cert_public_key_file}
 echo "TrustedUserCAKeys ${cloudflare_access_ca_cert_public_key_file}" >> /etc/ssh/sshd_config
+cat >> /etc/ssh/sshd_config <<EOF
+Match user ubuntu
+  AuthorizedPrincipalsCommand /bin/bash -c "echo '%t %k' | ssh-keygen -L -f - | grep -A1 Principals"
+  AuthorizedPrincipalsCommandUser nobody
+EOF
+
 systemctl restart sshd
 
 if [ $(uname -m) = "x86_64" ]; then

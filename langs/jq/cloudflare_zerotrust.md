@@ -19,7 +19,7 @@ $ curl -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUN
   | jq -rc '.result[] | [.id, .name, .status]'
 ```
 
-## Tunnel Secret
+## Tunnel Token
 
 ```bash
 $ tid=xxx
