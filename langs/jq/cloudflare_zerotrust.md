@@ -50,6 +50,17 @@ $ curl -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUN
   | jq -rc '.result[] | [.id, .name]'
 ```
 
+## Access Service Token Rotate
+```bash
+$ tid=xxx
+$ curl -X POST "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/access/service_tokens/${tid}/rotate" \
+  -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+  -H "X-Auth-Key: ${CLOUDFLARE_API_KEY}" \
+  -H "Content-Type: application/json" \
+  | jq -rc .
+  | jq -rc '.result[] | [.id, .name, .client_id, .client_secret]'
+```
+
 ## Access Group List
 
 ```bash
