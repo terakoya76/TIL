@@ -6,3 +6,8 @@ attach_metadata() {
           jq '. |= .+ {"exported_at": env.EXPORTED_AT}'
 }
 ```
+
+# JSON Array to CSV
+```bash
+cat hoge | jq -c '.slos[] | to_entries | [.[].value]' | sed 's/^.//' | sed 's/.$//'
+```

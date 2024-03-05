@@ -21,6 +21,11 @@ $ aws ec2 describe-instances --filter Name=instance-id,Values=${ID} \
 | jq -rc '.Reservations[].Instances[0].Tags[] | select(.Key == "Stage") | .Value'
 ```
 
+## Pickup All EC2 Instances
+```bash
+$ aws ec2 describe-instances | jq -c '.Reservations[].Instances[].Tags[] | select(.Key == "Name")'
+```
+
 ## Pick up tagged ASG
 ```bash
 $ KEY=<key-name>
@@ -41,7 +46,7 @@ $ aws autoscaling describe-auto-scaling-groups | jq --arg NAME ${NAME} '
 '
 ```
 
-## Pick up tagged Instances
+## Pickup tagged Instances
 ```bash
 $ KEY=<key-name>
 $ VALUE=<value-name>
@@ -89,4 +94,31 @@ new_instance_ids=$(aws --no-cli-auto-prompt \
 merged="{\"old_instance_ids\":${old_instance_ids}, \"new_instance_ids\":${new_instance_ids}}"
 
 echo ${merged} | jq -r '.new_instance_ids - .old_instance_ids | .[]'
+```
+
+## Pickup Unused SecurityGroup
+```bash
+for sg in `aws ec2 describe-security-groups --query 'SecurityGroups[].[join(\`,\`,[GroupId,GroupName])]' --output text`; do
+  echo -n "${sg}"
+  sg_id=$(echo ${sg} | cut -d ',' -f1)
+  sg_name=$(echo ${sg} | cut -d ',' -f2)
+
+  # ENI
+  eni=$(aws ec2 describe-network-interfaces --filters Name=group-id,Values=${sg_id} --query 'NetworkInterfaces[]' --output text)
+  if [ -n "${eni}" ]; then
+    echo -n ",true"
+  else
+    echo -n ",false"
+  fi
+
+  # Launch Configutation
+  as=$(aws autoscaling describe-launch-configurations --query "LaunchConfigurations[?contains(SecurityGroups,\`${sg_id}\`)].[LaunchConfigurationName]" --output text)
+  if [ -n "${as}" ]; then
+    echo -n ",true"
+  else
+    echo -n ",false"
+  fi
+
+  echo ;
+done
 ```
