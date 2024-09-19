@@ -37,7 +37,7 @@ GEM
     google-cloud-monitoring-v3 (0.12.1)
       gapic-common (>= 0.19.1, < 2.a)
       google-cloud-errors (~> 1.0)
-    google-protobuf (3.23.4-x86_64-linux)
+    google-protobuf (3.25.5-x86_64-linux)
     googleapis-common-protos (1.4.0)
       google-protobuf (~> 3.14)
       googleapis-common-protos-types (~> 1.2)
