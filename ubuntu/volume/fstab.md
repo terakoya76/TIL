@@ -15,4 +15,4 @@ $ mount -t ext4 /dev/sda1 /home
 * 3: FS type
 * 4: option
 * 5: whether dump FS or not
-* 6: whether check by fsck when OS boot
+* 6: whether check by fsck when OS boot, must be 1 for root FS
