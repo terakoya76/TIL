@@ -35,8 +35,10 @@
 cf. https://qiita.com/xshell/items/af4e2ef8d804cd29e38e
 
 ```bash
+sudo apt install arp-scan
 sudo arp-scan -l --interface en0
-ssh ubuntu@192.168.13.3
+
+ssh ubuntu@<ip>
 sudo apt update
 sudo apt upgrade
 ```
