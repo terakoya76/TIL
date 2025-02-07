@@ -58,8 +58,7 @@ $ sudo ip link show | grep veth0
 $ sudo ip netns exec netns01 ip link show
 1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-3: veth0-ct: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN qlen 1000
-    link/ether be:82:25:d8:94:30 brd ff:ff:ff:ff:ff:ff
+3: veth0-ct: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN qlen 1000 link/ether be:82:25:d8:94:30 brd ff:ff:ff:ff:ff:ff
 
 # set ip address to moved veth
 $ sudo ip netns exec netns01 ip addr add 10.10.10.11/24 dev veth0-ct
@@ -89,4 +88,10 @@ PING 10.10.10.10 (10.10.10.10) 56(84) bytes of data.
 64 bytes from 10.10.10.10: icmp_req=1 ttl=64 time=0.069 ms
 64 bytes from 10.10.10.10: icmp_req=2 ttl=64 time=0.068 ms
 64 bytes from 10.10.10.10: icmp_req=3 ttl=64 time=0.075 ms
+```
+
+Delete Veth for cleanup
+```sh
+$ sudo ip link set $veth down
+$ sudo ip link delete $veth
 ```
